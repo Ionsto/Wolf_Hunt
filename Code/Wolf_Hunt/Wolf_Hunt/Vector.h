@@ -1,9 +1,10 @@
 #pragma once
-class Vector
-{
-public:
-	float X, Y, Z;
-	Vector();
-	~Vector();
-};
-
+namespace Sim {
+	class Vector
+	{
+	public:
+		float X, Y, Z;
+		Vector();
+		~Vector();
+	};
+}

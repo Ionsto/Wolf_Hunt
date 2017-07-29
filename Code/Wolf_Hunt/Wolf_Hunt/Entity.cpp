@@ -2,16 +2,18 @@
 #include "World.h"
 
 
-Entity::Entity(World * wrld)
+Sim::Entity::Entity(World * wrld)
 {
 	this->WorldObj = wrld;
 }
 
 
-Entity::~Entity()
+Sim::Entity::~Entity()
 {
+
 }
 
-void Entity::Update()
+void Sim::Entity::Update()
 {
+
 }

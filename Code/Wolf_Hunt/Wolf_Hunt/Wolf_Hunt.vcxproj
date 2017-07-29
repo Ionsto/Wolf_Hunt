@@ -127,14 +127,14 @@
   <ItemGroup>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityLiving.h" />
-    <ClInclude Include="EntityMap.h" />
+    <ClInclude Include="GridNode.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityLiving.cpp" />
-    <ClCompile Include="EntityMap.cpp" />
+    <ClCompile Include="GridNode.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>

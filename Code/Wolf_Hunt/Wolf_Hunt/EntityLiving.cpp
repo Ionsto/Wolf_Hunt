@@ -2,21 +2,21 @@
 
 
 
-EntityLiving::EntityLiving(World * wrld) : Entity(wrld)
+Sim::EntityLiving::EntityLiving(Sim::World * wrld) : Entity(wrld)
 {
 }
 
 
-EntityLiving::~EntityLiving()
-{
-	
-}
-
-void EntityLiving::Update()
+Sim::EntityLiving::~EntityLiving()
 {
 	
 }
-void EntityLiving::UpdateAI()
+
+void Sim::EntityLiving::Update()
+{
+	
+}
+void Sim::EntityLiving::UpdateAI()
 {
 
 }
