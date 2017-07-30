@@ -15,6 +15,19 @@ Sim::Entity::~Entity()
 	WorldObj->WorldGrid[GridID.X][GridID.Y].RemoveEntity(this);
 }
 
+void Sim::Entity::SetLocation(Vector<float> pos)
+{
+	Pos = pos;
+	PosOld = pos;
+	Vector<int> NewGridID = WorldObj->GetGridIDs(Pos);
+	if (NewGridID != GridID)
+	{
+		//Update Grid
+		WorldObj->WorldGrid[NewGridID.X][NewGridID.Y].AddEntity(this);
+		WorldObj->WorldGrid[GridID.X][GridID.Y].RemoveEntity(this);
+	}
+}
+
 void Sim::Entity::Update()
 {
 	Intergrate();

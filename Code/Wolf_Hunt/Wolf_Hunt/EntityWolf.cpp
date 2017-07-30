@@ -4,6 +4,7 @@
 Sim::EntityWolf::EntityWolf(Sim::World * wrld) : Sim::EntityLiving(wrld)
 {
 	Type = EntityTypes::Wolf;
+	TargetLocation = Pos;
 }
 
 
@@ -19,4 +20,12 @@ void Sim::EntityWolf::Update()
 void Sim::EntityWolf::UpdateAI()
 {
 	//Do ai updates
+	Vector<float> Diff = TargetLocation - Pos;
+	this->Acceleration += Diff.Normalise() * MaxAcceleration;
+}
+
+void Sim::EntityWolf::SetLocation(Vector<float> pos)
+{
+	Entity::SetLocation(pos);
+	TargetLocation = pos;
 }

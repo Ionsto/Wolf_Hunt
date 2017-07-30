@@ -1,2 +1,14 @@
-﻿  EntitySheep.cpp
+﻿  AIBoids.cpp
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\aiboids.cpp(8): warning C4305: '=': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\aiboids.cpp(9): warning C4305: '=': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\aiboids.cpp(23): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  World.cpp
+  GridNode.cpp
+  EntityWolf.cpp
+  EntitySheep.cpp
+  EntityLiving.cpp
+  EntityGrass.cpp
+  Entity.cpp
   Wolf_Hunt.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Debug\Wolf_Hunt.lib

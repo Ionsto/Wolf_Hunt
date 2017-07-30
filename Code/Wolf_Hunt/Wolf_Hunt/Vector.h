@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 namespace Sim {
 	template<class type>
 	class Vector
@@ -12,6 +13,7 @@ namespace Sim {
 		Vector operator-(Vector other);
 		Vector operator*(float val);
 		float Dot(Vector other);
+		Vector Normalise();
 		//Strict equality
 		bool operator!=(Vector check);
 		bool operator==(Vector check);
@@ -33,7 +35,14 @@ Sim::Vector<type>::~Vector()
 template<class type>
 float Sim::Vector<type>::Dot(Vector<type> other)
 {
-return (X * other.X) + (Y * other.Y);
+	return (X * other.X) + (Y * other.Y);
+}
+
+template<class type>
+Sim::Vector<type> Sim::Vector<type>::Normalise()
+{
+	float mag = sqrtf(this->Dot(*this));
+	return *this * (1/mag);
 }
 
 template<class type>

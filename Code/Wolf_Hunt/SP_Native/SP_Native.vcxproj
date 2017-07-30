@@ -128,11 +128,13 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="KeyState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MouseState.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="KeyState.h" />
+    <ClInclude Include="MouseState.h" />
     <ClInclude Include="RenderSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

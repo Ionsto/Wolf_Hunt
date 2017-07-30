@@ -1,3 +1,12 @@
-﻿  RenderSystem.cpp
+﻿  MouseState.cpp
+  Generating Code...
+  Compiling...
+  main.cpp
+  GameManager.cpp
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(56): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(57): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(68): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(69): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
   SP_Native.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Debug\SP_Native.exe
   SP_Native.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Debug\SP_Native.pdb (Partial PDB)

@@ -24,6 +24,7 @@ namespace Sim {
 		virtual void Update();
 		void Intergrate();
 		void EnforceBoundry();
+		virtual void SetLocation(Vector<float> pos);
 		//Clean up everything
 		void Kill();
 	};
