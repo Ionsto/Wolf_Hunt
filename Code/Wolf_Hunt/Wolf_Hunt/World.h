@@ -7,11 +7,14 @@ namespace Sim {
 	class World
 	{
 	public:
-		static const int GridCount = 10;
+		int WorldSize;
+		int GridCount;
+		int GridSize;
 		static const int EntityCount = 5000;
-		std::array<std::array<Sim::GridNode, GridCount>, GridCount> WorldGrid;
+		Sim::GridNode ** WorldGrid;
 		//Represents the master list of all entities
 		std::array<std::unique_ptr<Sim::Entity>, EntityCount> EntityList;
+		Vector<int> GetGridIDs(Vector<float> Pos);
 		World();
 		~World();
 		//Single tick happens
@@ -20,5 +23,7 @@ namespace Sim {
 		void ResolveGrid();
 		//Resolve all entity->entity collisions
 		void ResolveCollisions();
+		int AddEntity(std::unique_ptr<Entity> ent);
+		std::list<Entity *> GetNearbyEntities(Vector<int> gridid);
 	};
 }
