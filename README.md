@@ -11,9 +11,14 @@ AI will hunt to create pressure outside of the player's control
 
 Possiblities:
 -------
+
 Multi:
+
 JS frontend/C++ backend
+
 One player per wolf with team hunting
+
 -------
 SP:
+
 point and click selecting wolves to hunt as a single player game
