@@ -4,7 +4,7 @@
 
 Sim::World::World()
 {
-	GridCount = 4;
+	GridCount = 10;
 	WorldSize = 1000;
 	GridSize = WorldSize / GridCount;
 	this->WorldGrid = new GridNode*[GridCount];
@@ -147,18 +147,21 @@ int Sim::World::AddEntity(std::unique_ptr<Entity> ent)
 }
 std::vector<Sim::Entity *> Sim::World::GetNearbyEntities(Vector<int> gridid)
 {
-	const std::list<std::array<int,2>> offsets = {{-1,-1},{-1,0},{-1,1},{0,-1},{0,0},{0,1},{ 1,-1 },{ 1,0 },{ 1,1 } };
+	const int LookUpDistance = 2;
 	std::vector<Sim::Entity*> Entities = std::vector<Sim::Entity*>();
-	for each (auto var in offsets)
+	for (int x = -LookUpDistance; x <= LookUpDistance; ++x)
 	{
-		Vector<int> idloc = gridid + Vector<int>(var[0], var[1]);
-		if (idloc.X >= 0 && idloc.X < GridCount)
+		for (int y = -LookUpDistance; y <= LookUpDistance; ++y)
 		{
-			if (idloc.Y >= 0 && idloc.Y < GridCount)
+			Vector<int> idloc = gridid + Vector<int>(x, y);
+			if (idloc.X >= 0 && idloc.X < GridCount)
 			{
-				std::vector<Sim::Entity*> NEntity = WorldGrid[idloc.X][idloc.Y].GetEntities();
-				Entities.insert(std::end(Entities), std::begin(NEntity), std::end(NEntity));
-				//Entities.insert(Entities.end(), WorldGrid[idloc.X][idloc.Y].GetEntities().begin(), WorldGrid[idloc.X][idloc.Y].GetEntities().end());
+				if (idloc.Y >= 0 && idloc.Y < GridCount)
+				{
+					std::vector<Sim::Entity*> NEntity = WorldGrid[idloc.X][idloc.Y].GetEntities();
+					Entities.insert(std::end(Entities), std::begin(NEntity), std::end(NEntity));
+					//Entities.insert(Entities.end(), WorldGrid[idloc.X][idloc.Y].GetEntities().begin(), WorldGrid[idloc.X][idloc.Y].GetEntities().end());
+				}
 			}
 		}
 	}

@@ -1,0 +1,18 @@
+﻿  AIBoids.cpp
+AIBoids.cpp(66): warning C4244: 'argument': conversion from 'unsigned __int64' to 'float', possible loss of data
+AIBoids.cpp(85): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  Entity.cpp
+Entity.cpp(8): warning C4305: '=': truncation from 'double' to 'float'
+Entity.cpp(52): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Entity.cpp(53): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Entity.cpp(57): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Entity.cpp(58): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  EntityGrass.cpp
+  EntityLiving.cpp
+  EntitySheep.cpp
+  EntityWolf.cpp
+  GridNode.cpp
+  World.cpp
+World.cpp(26): warning C4305: '=': truncation from 'double' to 'float'
+World.cpp(126): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Wolf_Hunt.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Release\Wolf_Hunt.lib

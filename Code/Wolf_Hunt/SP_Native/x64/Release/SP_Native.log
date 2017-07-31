@@ -1,0 +1,17 @@
+﻿  GameManager.cpp
+GameManager.cpp(31): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+GameManager.cpp(67): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+GameManager.cpp(68): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+GameManager.cpp(79): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+GameManager.cpp(80): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+GameManager.cpp(83): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+GameManager.cpp(84): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+GameManager.cpp(159): warning C4305: '=': truncation from 'double' to 'float'
+  MouseState.cpp
+  RenderSystem.cpp
+  main.cpp
+  Generating code
+  All 361 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  SP_Native.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Release\SP_Native.exe
+  SP_Native.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Release\SP_Native.pdb (Full PDB)
