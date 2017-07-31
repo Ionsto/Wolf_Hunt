@@ -10,8 +10,10 @@ namespace Sim {
 		~Vector();
 		Vector operator+(Vector other);
 		void operator+=(Vector other);
+		void operator-=(Vector other);
 		Vector operator-(Vector other);
 		Vector operator*(float val);
+		Vector operator/(float val);
 		float Dot(Vector other);
 		Vector Normalise();
 		//Strict equality
@@ -42,7 +44,7 @@ template<class type>
 Sim::Vector<type> Sim::Vector<type>::Normalise()
 {
 	float mag = sqrtf(this->Dot(*this));
-	return *this * (1/mag);
+	return *this / mag;
 }
 
 template<class type>
@@ -54,8 +56,14 @@ return Vector(X + other.X, Y + other.Y);
 template<class type>
 void Sim::Vector<type>::operator+=(Vector<type> other)
 {
-X += other.X;
-Y += other.Y;
+	X += other.X;
+	Y += other.Y;
+}
+template<class type>
+void Sim::Vector<type>::operator-=(Vector<type> other)
+{
+	X -= other.X;
+	Y -= other.Y;
 }
 
 template<class type>
@@ -67,7 +75,16 @@ return Vector(X - other.X, Y - other.Y);
 template<class type>
 Sim::Vector<type> Sim::Vector<type>::operator*(float val)
 {
-return Vector(X * val, Y * val);
+	return Vector(X * val, Y * val);
+}
+template<class type>
+Sim::Vector<type> Sim::Vector<type>::operator/(float val)
+{
+	if (val == 0)
+	{
+		return Vector<type>();
+	}
+	return Vector(X / val, Y / val);
 }
 
 template<class type>

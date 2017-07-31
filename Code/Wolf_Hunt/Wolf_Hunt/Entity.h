@@ -9,7 +9,8 @@ namespace Sim {
 		Vector<float> Pos;
 		Vector<float> PosOld;
 		Vector<float> Acceleration;
-		float Mass;
+		float Mass = 1;
+		float Size = 10;
 		float Rot;
 		float RotOld;
 		float RotAcc;
@@ -25,6 +26,7 @@ namespace Sim {
 		void Intergrate();
 		void EnforceBoundry();
 		virtual void SetLocation(Vector<float> pos);
+		void ApplyForce(Vector<float> force);
 		//Clean up everything
 		void Kill();
 	};

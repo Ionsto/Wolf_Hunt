@@ -7,10 +7,11 @@ namespace Sim {
 	class World
 	{
 	public:
+		float DeltaTime = 1/60;
 		int WorldSize;
 		int GridCount;
 		int GridSize;
-		static const int EntityCount = 5000;
+		static const int EntityCount = 2000;
 		Sim::GridNode ** WorldGrid;
 		//Represents the master list of all entities
 		std::array<std::unique_ptr<Sim::Entity>, EntityCount> EntityList;
@@ -24,6 +25,6 @@ namespace Sim {
 		//Resolve all entity->entity collisions
 		void ResolveCollisions();
 		int AddEntity(std::unique_ptr<Entity> ent);
-		std::list<Entity *> GetNearbyEntities(Vector<int> gridid);
+		std::vector<Entity *> GetNearbyEntities(Vector<int> gridid);
 	};
 }

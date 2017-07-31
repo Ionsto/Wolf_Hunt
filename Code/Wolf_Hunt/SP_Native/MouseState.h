@@ -9,7 +9,6 @@ public:
 	Sim::Vector<float> Location;
 	MouseState();
 	~MouseState();
-	void UpdateLeft(int state);
-	void UpdateRight(int state);
+	void Update();
 };
 

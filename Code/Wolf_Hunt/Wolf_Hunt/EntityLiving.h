@@ -5,7 +5,7 @@ namespace Sim {
 	{
 	public:
 		float MaxSpeed = 10;
-		float MaxAcceleration = 5;
+		float MaxAcceleration = 40;
 		enum EntityTypes {
 		Wolf,Sheep,Other
 		} Type;

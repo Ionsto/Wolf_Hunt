@@ -21,9 +21,13 @@ void Sim::GridNode::AddEntity(Entity * ent)
 }
 void Sim::GridNode::RemoveEntity(Entity * ent)
 {
-	EntityList.remove(ent);
+	auto it = std::find(EntityList.begin(), EntityList.end(), ent);
+	if (it != EntityList.end()) {
+		std::swap(*it, EntityList.back());
+		EntityList.pop_back();
+	}
 }
-std::list<Sim::Entity*> Sim::GridNode::GetEntities()
+std::vector<Sim::Entity*> Sim::GridNode::GetEntities()
 {
 	return EntityList;
 }

@@ -25,6 +25,12 @@ void GameManager::Init()
 	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(20, 20));
 	id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(Sim::EntityWolf(WorldInstance.get())));
 	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(100, 100));
+
+	for (int i = 0; i < 100; ++i)
+	{
+		int id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(Sim::EntitySheep(WorldInstance.get())));
+		WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(rand() % WorldInstance->WorldSize, rand() % WorldInstance->WorldSize));
+	}
 	Mouse = MouseState();
 }
 void GameManager::Update()
@@ -43,6 +49,7 @@ void GameManager::PollInput()
 	sf::Event event;
 
 	// while there are pending events...
+	Mouse.Update();
 	while (Window.pollEvent(event))
 	{
 		// check the type of the event...
@@ -57,23 +64,27 @@ void GameManager::PollInput()
 			Mouse.Location.Y = event.mouseButton.y;
 			if (event.mouseButton.button == 0)
 			{
-				Mouse.UpdateLeft(0);
+				Mouse.Left = ButtonState::GoingDown;
 			}
 			if (event.mouseButton.button == 1)
 			{
-				Mouse.UpdateRight(0);
+				Mouse.Right = ButtonState::GoingDown;
 			}
+			break;
+		case sf::Event::MouseMoved:
+			Mouse.Location.X = event.mouseMove.x;
+			Mouse.Location.Y = event.mouseMove.y;
 			break;
 		case sf::Event::MouseButtonReleased:
 			Mouse.Location.X = event.mouseButton.x;
 			Mouse.Location.Y = event.mouseButton.y;
 			if (event.mouseButton.button == 0)
 			{
-				Mouse.UpdateLeft(1);
+				Mouse.Left = ButtonState::GoingUp;
 			}
 			if (event.mouseButton.button == 1)
 			{
-				Mouse.UpdateRight(1);
+				Mouse.Right = ButtonState::GoingUp;
 			}
 			break;
 			// key pressed
@@ -99,15 +110,46 @@ void GameManager::PollInput()
 	if (Mouse.Left == ButtonState::GoingDown)
 	{
 		//Search
+		Selected = NULL;
+		for (int i = 0; i < WorldInstance->EntityCount; ++i)
+		{
+			if (WorldInstance->EntityList[i])
+			{
+				if (WorldInstance->EntityList[i]->Alive)
+				{
+					if (dynamic_cast<Sim::EntityWolf*>(WorldInstance->EntityList[i].get()) != NULL)
+					{
+						Sim::Vector<float> Diff = WorldInstance->EntityList[i]->Pos - Mouse.Location;
+						float Distdot = Diff.Dot(Diff);
+						if (Distdot < 10 * 10)
+						{
+							//Select
+							Selected = dynamic_cast<Sim::EntityWolf*>(WorldInstance->EntityList[i].get());
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (Mouse.Right == ButtonState::GoingDown)
+	{
+		if (Selected != NULL)
+		{
+			Selected->TargetLocation = Mouse.Location;
+		}
 	}
 }
 void GameManager::MainLoop()
 {
+	WorldInstance->DeltaTime = 1 / 60;
 	while (Running)
 	{
 		PollInput();
 		Update();
 		Render();
+		sf::Time elapsed = clock.restart();
+		WorldInstance->DeltaTime = elapsed.asSeconds();
 	}
 	Window.close();
 }

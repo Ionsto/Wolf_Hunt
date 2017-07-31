@@ -7,6 +7,8 @@ Sim::EntitySheep::EntitySheep(Sim::World * wrld) : Sim::EntityLiving(wrld)
 {
 	Type = EntityTypes::Sheep;
 	BoidsInstance = AIBoids();
+	Size = 10;
+	MaxAcceleration = 300;
 }
 
 
@@ -22,8 +24,10 @@ void Sim::EntitySheep::Update()
 void Sim::EntitySheep::UpdateAI()
 {
 	//Do ai updates
-	std::list<Entity*> NearEntity = WorldObj->GetNearbyEntities(GridID);
-	NearEntity.remove(this);
+	std::vector<Entity*> NearEntity = WorldObj->GetNearbyEntities(GridID);
+	auto it = std::find(NearEntity.begin(), NearEntity.end(), this);
+	std::swap(*it, NearEntity.back());
+	NearEntity.pop_back();
 	Vector<float> Acc;
 	int AIState = 0;
 	switch (AIState)
@@ -35,7 +39,7 @@ void Sim::EntitySheep::UpdateAI()
 		{
 			Acc = Acc * (MaxAcceleration / sqrtf(Acc.Dot(Acc)));
 		}
-		Acceleration += Acc;
+		ApplyForce(Acc);
 			break;
 		case 1:
 			//Eat

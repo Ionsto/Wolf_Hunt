@@ -25,6 +25,7 @@ void Sim::Entity::SetLocation(Vector<float> pos)
 		//Update Grid
 		WorldObj->WorldGrid[NewGridID.X][NewGridID.Y].AddEntity(this);
 		WorldObj->WorldGrid[GridID.X][GridID.Y].RemoveEntity(this);
+		GridID = NewGridID;
 	}
 }
 
@@ -60,7 +61,7 @@ void Sim::Entity::Intergrate()
 {
 	//Linear intergration
 	Vector<float> NewOld = this->Pos;
-	Pos += ((Pos - PosOld) * LinearDamp) + (Acceleration * 0.5);
+	Pos += ((Pos - PosOld) * LinearDamp) + (Acceleration * WorldObj->DeltaTime * WorldObj->DeltaTime);
 	PosOld = NewOld;
 	Acceleration = Vector<float>();
 }
@@ -68,4 +69,8 @@ void Sim::Entity::Kill()
 {
 	//Do death stuff
 	Alive = false;
+}
+void Sim::Entity::ApplyForce(Vector<float> force)
+{
+	this->Acceleration += force / Mass;
 }

@@ -5,8 +5,8 @@ namespace Sim {
 		public Entity
 	{
 	public:
-		int GrowthCount = 0;
-		int MaxGrowthCount = 1000;
+		float GrowthCount = 0;
+		float MaxGrowthCount = 1000;
 		int EnergyPerEat = 50;
 		bool Grown = false;
 		EntityGrass(World * world);

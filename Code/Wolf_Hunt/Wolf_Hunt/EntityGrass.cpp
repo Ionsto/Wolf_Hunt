@@ -1,9 +1,10 @@
 #include "EntityGrass.h"
-
+#include "World.h"
 
 
 Sim::EntityGrass::EntityGrass(Sim::World * wrld) : Sim::Entity(wrld)
 {
+	Size = 5;
 }
 
 
@@ -14,7 +15,8 @@ void Sim::EntityGrass::Update()
 {
 	if (!Grown)
 	{
-		if (++GrowthCount == MaxGrowthCount)
+		GrowthCount += WorldObj->DeltaTime;
+		if (GrowthCount >= MaxGrowthCount)
 		{
 			Grown = true;
 			GrowthCount = 0;
