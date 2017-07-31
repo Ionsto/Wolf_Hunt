@@ -1,10 +1,2 @@
-﻿  GameManager.cpp
-d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(63): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(64): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(75): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(76): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(79): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(80): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  SP_Native.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Debug\SP_Native.exe
+﻿  SP_Native.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Debug\SP_Native.exe
   SP_Native.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Debug\SP_Native.pdb (Partial PDB)

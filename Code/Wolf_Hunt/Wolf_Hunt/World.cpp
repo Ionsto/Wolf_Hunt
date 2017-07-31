@@ -96,14 +96,20 @@ void Sim::World::ResolveCollisions()
 							if (SqrdDistacnce < CombinedSize * CombinedSize)
 							{
 								//Collision happened
-								Vector<float> Speed = (entA->Pos - entA->PosOld) + (entB->Pos - entB->PosOld);
-								Diff = (Diff / sqrtf(SqrdDistacnce)) * CombinedSize;
+								Vector<float> VAB = (entA->Pos - entA->PosOld) - (entB->Pos - entB->PosOld);
+								const float e = 1;
+								float j = (-(1 + e) * VAB.Dot(Diff)) / (SqrdDistacnce * (1/entA->Mass + 1/entB->Mass));
+
+								float sqrtDistance = sqrtf(SqrdDistacnce);
+								Vector<float> Translate = (Diff / sqrtDistance) * (CombinedSize - sqrtDistance);
 								//Move them to touching
-								
-								entA->Pos += Diff * 0.5;
-								entB->Pos -= Diff * 0.5;
-								entA->PosOld += Diff * 0.25;
-								entB->PosOld -= Diff * 0.25;
+								Diff = Diff / sqrtDistance;
+								entA->Pos += Translate * 0.5;
+								entB->Pos -= Translate * 0.5;
+								entA->PosOld += Translate * 0.5;
+								entB->PosOld -= Translate * 0.5;
+								entA->PosOld -= Diff * j;
+								entB->PosOld += Diff * j;
 							}
 						}
 					}
