@@ -12,31 +12,15 @@ KeyState::~KeyState()
 {
 }
 //0 = down, 1 = up
-void KeyState::Update(int state)
+void KeyState::Update()
 {
-	switch (state)
+	switch(Key)
 	{
-	case 0:
-		switch (Key)
-		{
-		case Up:
-		case GoingUp:
-			Key = GoingDown;
-			break;
-		case GoingDown:
-			Key = Down;
-		}
+	case GoingUp:
+		Key = Up;
 		break;
-	case 1:
-		switch (Key)
-		{
-		case Down:
-		case GoingDown:
-			Key = GoingUp;
-			break;
-		case GoingUp:
-			Key = Up;
-		}
+	case GoingDown:
+		Key = Down;
 		break;
 	}
-};
+}

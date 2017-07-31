@@ -8,7 +8,7 @@ Sim::EntitySheep::EntitySheep(Sim::World * wrld) : Sim::EntityLiving(wrld)
 	Type = EntityTypes::Sheep;
 	BoidsInstance = AIBoids();
 	Size = 10;
-	MaxAcceleration = 300;
+	MaxAcceleration = 200;
 }
 
 
@@ -18,8 +18,8 @@ Sim::EntitySheep::~EntitySheep()
 
 void Sim::EntitySheep::Update()
 {
-	EntityLiving::Update();
 	UpdateAI();
+	EntityLiving::Update();
 }
 void Sim::EntitySheep::UpdateAI()
 {
@@ -34,12 +34,12 @@ void Sim::EntitySheep::UpdateAI()
 	{
 		//Boid
 		case 0:
-		Acc = BoidsInstance.CalculateAcc(this, NearEntity);
-		if (Acc.Dot(Acc) > MaxAcceleration * MaxAcceleration)
-		{
-			Acc = Acc * (MaxAcceleration / sqrtf(Acc.Dot(Acc)));
-		}
-		ApplyForce(Acc);
+			Acc = BoidsInstance.CalculateAcc(this, NearEntity);
+			if (Acc.Dot(Acc) > MaxAcceleration * MaxAcceleration)
+			{
+				Acc = Acc.Normalise() * MaxAcceleration;
+			}
+			ApplyForce(Acc);
 			break;
 		case 1:
 			//Eat

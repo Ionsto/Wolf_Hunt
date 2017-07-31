@@ -5,10 +5,9 @@ GoingDown, Down, GoingUp, Up
 class KeyState
 {
 public:
-	ButtonState Key;
+	ButtonState Key = ButtonState::Up;
 	KeyState();
 	~KeyState();
-	//0 = down, 1 = up
-	void Update(int state);
+	void Update();
 };
 

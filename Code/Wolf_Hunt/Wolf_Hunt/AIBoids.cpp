@@ -1,13 +1,15 @@
 #include "AIBoids.h"
 #include "EntitySheep.h"
 #include "EntityWolf.h"
+#include "World.h"
 
 Sim::AIBoids::AIBoids()
 {
-	Repulsion = 5;
-	Clump = .1;
-	Coheasion = 1;
-	Flee = .8;
+	Repulsion = 1000;
+	Clump = 6;
+	Coheasion = 500;
+	Flee = 1500;
+	WallAversion = 100;
 }
 
 
@@ -22,7 +24,8 @@ Sim::Vector<float> Sim::AIBoids::CalculateAcc(Entity * Self,std::vector<Entity*>
 	Result += CalculateRepulsion(Self, list) * Repulsion;
 	Result += CalculateClump(Self, list) * Clump;
 	Result += CalculateFlee(Self, list) * Flee;
-	Result = Result;
+	Result += CalculateWallAversion(Self) * WallAversion;
+	//Result = Result;
 	return Result;
 }
 
@@ -57,7 +60,7 @@ Sim::Vector<float> Sim::AIBoids::CalculateCoheasion(Entity * Self, std::vector<E
 	{
 		if (dynamic_cast<Sim::EntitySheep*>(ent) != NULL) {
 			Vector<float> dist = ent->Pos - Self->Pos;
-			Result += (ent->Pos - ent->PosOld) / (dist.Dot(dist));
+			Result += (ent->Pos - ent->PosOld) / sqrt(dist.Dot(dist));
 		}
 	}
 	Result = Result / list.size();
@@ -71,8 +74,18 @@ Sim::Vector<float> Sim::AIBoids::CalculateFlee(Entity * Self, std::vector<Entity
 	{
 		if (dynamic_cast<Sim::EntityWolf*>(ent) != NULL) {
 			Vector<float> dist = Self->Pos - ent->Pos;
-			Acc += dist *(1 / sqrtf(dist.Dot(dist)));
+			Acc += dist / sqrtf(dist.Dot(dist));
 		}
 	}
+	return Acc;
+}
+Sim::Vector<float> Sim::AIBoids::CalculateWallAversion(Entity * Self)
+{
+	Vector<float> Acc = Vector<float>();
+	float HalfDist = (Self->WorldObj->WorldSize / 2);
+	Acc.X = (HalfDist - Self->Pos.X) / HalfDist;
+	Acc.Y = (HalfDist - Self->Pos.Y) / HalfDist;
+	Acc.X *= abs(Acc.X);
+	Acc.Y *= abs(Acc.Y);
 	return Acc;
 }

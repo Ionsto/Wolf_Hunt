@@ -4,6 +4,7 @@
 
 RenderSystem::RenderSystem()
 {
+	CameraLocation = Sim::Vector<float>();
 	Wolf = sf::RectangleShape();
 	Wolf.setSize(sf::Vector2f(20, 20));
 	Wolf.setOrigin(sf::Vector2f(5, 5));
@@ -37,20 +38,20 @@ void RenderSystem::Render(Sim::World * world, sf::RenderWindow * window)
 					switch (ent->Type)
 					{
 					case Sim::EntityLiving::EntityTypes::Wolf:
-						Wolf.setPosition(ent->Pos.X, ent->Pos.Y);
+						Wolf.setPosition(ent->Pos.X - CameraLocation.X, ent->Pos.Y - CameraLocation.Y);
 						window->draw(Wolf);
 						//render wolf
 						break;
 					case Sim::EntityLiving::EntityTypes::Sheep:
 						//render sheep
-						Sheep.setPosition(ent->Pos.X, ent->Pos.Y);
+						Sheep.setPosition(ent->Pos.X - CameraLocation.X, ent->Pos.Y - CameraLocation.Y);
 						window->draw(Sheep);
 						break;
 					}
 				}
 				if (dynamic_cast<Sim::EntityGrass*>(world->EntityList[i].get()) != NULL)
 				{
-					Grass.setPosition(world->EntityList[i].get()->Pos.X, world->EntityList[i].get()->Pos.Y);
+					Grass.setPosition(world->EntityList[i].get()->Pos.X - CameraLocation.X, world->EntityList[i].get()->Pos.Y - CameraLocation.Y);
 					if (dynamic_cast<Sim::EntityGrass*>(world->EntityList[i].get())->Grown)
 					{
 						Grass.setFillColor(sf::Color(0, 255, 0, 255));

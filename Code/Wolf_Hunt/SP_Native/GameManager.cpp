@@ -3,7 +3,6 @@
 #include "./../Wolf_Hunt/EntityWolf.h"
 
 
-
 GameManager::GameManager()
 {
 }
@@ -32,6 +31,7 @@ void GameManager::Init()
 		WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(rand() % WorldInstance->WorldSize, rand() % WorldInstance->WorldSize));
 	}
 	Mouse = MouseState();
+	Window.setKeyRepeatEnabled(false);
 }
 void GameManager::Update()
 {
@@ -50,6 +50,10 @@ void GameManager::PollInput()
 
 	// while there are pending events...
 	Mouse.Update();
+	for each(auto keyset in KeyArray)
+	{
+		keyset.Update();
+	}
 	while (Window.pollEvent(event))
 	{
 		// check the type of the event...
@@ -91,13 +95,14 @@ void GameManager::PollInput()
 		case sf::Event::KeyPressed:
 			if (event.key.code >= 0 && event.key.code <= 255)
 			{
-				this->KeyArray[event.key.code].Update(0);
+				this->KeyArray[event.key.code].Key = ButtonState::GoingDown;
+				//std::cout << "KeyDown" << std::endl;
 			}
 			break;
 		case sf::Event::KeyReleased:
 			if (event.key.code >= 0 && event.key.code <= 255)
 			{
-				this->KeyArray[event.key.code].Update(1);
+				this->KeyArray[event.key.code].Key = ButtonState::GoingUp;
 			}
 			break;
 		default:
@@ -139,10 +144,20 @@ void GameManager::PollInput()
 			Selected->TargetLocation = Mouse.Location;
 		}
 	}
+	float CameraSpeed = 100;
+	if (KeyArray[sf::Keyboard::A].Key == ButtonState::Down)
+	{
+		RenderEngine.CameraLocation.X += CameraSpeed * WorldInstance->DeltaTime;
+	}
+	if (KeyArray[sf::Keyboard::D].Key == ButtonState::Down)
+	{
+		RenderEngine.CameraLocation.X -= CameraSpeed * WorldInstance->DeltaTime;
+	}
 }
 void GameManager::MainLoop()
 {
-	WorldInstance->DeltaTime = 1 / 60;
+	WorldInstance->DeltaTime = 0.000001;
+	sf::Time elapsed = clock.restart();
 	while (Running)
 	{
 		PollInput();

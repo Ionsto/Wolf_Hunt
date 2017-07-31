@@ -12,12 +12,14 @@ namespace Sim {
 		float Clump;
 		float Coheasion;
 		float Flee;
+		float WallAversion;
 		Vector<float> CalculateAcc(Entity * Self,std::vector<Entity*> list);
 	private:
 		Vector<float> CalculateRepulsion(Entity * Self,std::vector<Entity*> list);
 		Vector<float> CalculateClump(Entity * Self,std::vector<Entity*> list);
 		Vector<float> CalculateCoheasion(Entity * Self, std::vector<Entity*> list);
 		Vector<float> CalculateFlee(Entity * Self, std::vector<Entity*> list);
+		Vector<float> CalculateWallAversion(Entity * Self);
 
 	};
 }

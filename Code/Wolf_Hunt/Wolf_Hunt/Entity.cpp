@@ -6,6 +6,7 @@ Sim::Entity::Entity(World * wrld)
 {
 	this->WorldObj = wrld;
 	LinearDamp = 0.90;
+	Acceleration = Vector<float>();
 }
 
 

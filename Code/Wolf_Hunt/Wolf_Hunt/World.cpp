@@ -4,7 +4,7 @@
 
 Sim::World::World()
 {
-	GridCount = 10;
+	GridCount = 4;
 	WorldSize = 1000;
 	GridSize = WorldSize / GridCount;
 	this->WorldGrid = new GridNode*[GridCount];
@@ -23,7 +23,7 @@ Sim::World::World()
 		//EntityList[id]->PosOld = EntityList[id]->Pos;
 	}
 	ResolveGrid();
-	DeltaTime = 0.1;
+	DeltaTime = 0.001;
 }
 
 
@@ -79,43 +79,45 @@ void Sim::World::ResolveCollisions()
 		for (int YGrid = 0; YGrid < GridCount; ++YGrid)
 		{
 			std::vector<Entity *> NearEntites = GetNearbyEntities(Vector<int>(XGrid,YGrid));
-			for (int i = 0; i < NearEntites.size() - 1; ++i)
+			if(NearEntites.size() > 0)
 			{
-				if (NearEntites[i]->Alive)
+				for (int i = 0; i < NearEntites.size() - 1; ++i)
 				{
-					for (int j = i + 1; j < NearEntites.size(); ++j)
+					if (NearEntites[i]->Alive)
 					{
-						if (NearEntites[j]->Alive)
+						for (int j = i + 1; j < NearEntites.size(); ++j)
 						{
-							Entity * entA = NearEntites[i];
-							Entity * entB = NearEntites[j];
-							//Collision detect
-							Vector<float> Diff = entA->Pos - entB->Pos;
-							float SqrdDistacnce = Diff.Dot(Diff);
-							float CombinedSize = entA->Size + entB->Size;
-							if (SqrdDistacnce < CombinedSize * CombinedSize)
+							if (NearEntites[j]->Alive)
 							{
-								//Collision happened
-								Vector<float> VAB = (entA->Pos - entA->PosOld) - (entB->Pos - entB->PosOld);
-								const float e = 1;
-								float j = (-(1 + e) * VAB.Dot(Diff)) / (SqrdDistacnce * (1/entA->Mass + 1/entB->Mass));
+								Entity * entA = NearEntites[i];
+								Entity * entB = NearEntites[j];
+								//Collision detect
+								Vector<float> Diff = entA->Pos - entB->Pos;
+								float SqrdDistacnce = Diff.Dot(Diff);
+								float CombinedSize = entA->Size + entB->Size;
+								if (SqrdDistacnce < CombinedSize * CombinedSize)
+								{
+									//Collision happened
+									Vector<float> VAB = (entA->Pos - entA->PosOld) - (entB->Pos - entB->PosOld);
+									const float e = 1;
+									float j = (-(1 + e) * VAB.Dot(Diff)) / (SqrdDistacnce * (1 / entA->Mass + 1 / entB->Mass));
 
-								float sqrtDistance = sqrtf(SqrdDistacnce);
-								Vector<float> Translate = (Diff / sqrtDistance) * (CombinedSize - sqrtDistance);
-								//Move them to touching
-								Diff = Diff / sqrtDistance;
-								entA->Pos += Translate * 0.5;
-								entB->Pos -= Translate * 0.5;
-								entA->PosOld += Translate * 0.5;
-								entB->PosOld -= Translate * 0.5;
-								entA->PosOld -= Diff * j;
-								entB->PosOld += Diff * j;
+									float sqrtDistance = sqrtf(SqrdDistacnce);
+									Vector<float> Translate = (Diff / sqrtDistance) * (CombinedSize - sqrtDistance);
+									//Move them to touching
+									Diff = Diff / sqrtDistance;
+									entA->Pos += Translate * 0.5;
+									entB->Pos -= Translate * 0.5;
+									entA->PosOld += Translate * 0.5;
+									entB->PosOld -= Translate * 0.5;
+									entA->PosOld -= Diff * j;
+									entB->PosOld += Diff * j;
+								}
 							}
 						}
 					}
 				}
 			}
-
 		}
 	}
 }

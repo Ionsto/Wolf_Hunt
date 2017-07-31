@@ -7,6 +7,7 @@
 class RenderSystem
 {
 public:
+	Sim::Vector<float> CameraLocation;
 	sf::RectangleShape Wolf;
 	sf::RectangleShape Sheep;
 	sf::RectangleShape Grass;
