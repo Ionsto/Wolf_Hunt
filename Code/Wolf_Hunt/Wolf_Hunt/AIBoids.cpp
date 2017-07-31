@@ -18,9 +18,9 @@ Sim::AIBoids::~AIBoids()
 Sim::Vector<float> Sim::AIBoids::CalculateAcc(Entity * Self,std::vector<Entity*> list)
 {
 	Sim::Vector<float> Result = Vector<float>();
-	//Result += CalculateCoheasion(Self,list) * Coheasion;
-	//Result += CalculateRepulsion(Self, list) * Repulsion;
-	//Result += CalculateClump(Self, list) * Clump;
+	Result += CalculateCoheasion(Self,list) * Coheasion;
+	Result += CalculateRepulsion(Self, list) * Repulsion;
+	Result += CalculateClump(Self, list) * Clump;
 	Result += CalculateFlee(Self, list) * Flee;
 	Result = Result;
 	return Result;

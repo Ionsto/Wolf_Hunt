@@ -16,7 +16,7 @@ GameManager::~GameManager()
 void GameManager::Init()
 {
 	WorldInstance = std::make_unique<Sim::World>();
-	Window.create(sf::VideoMode(800, 600), "My window");
+	Window.create(sf::VideoMode(1000, 1000), "My window");
 	RenderEngine = RenderSystem();
 	Running = true;
 	int id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(Sim::EntitySheep(WorldInstance.get())));

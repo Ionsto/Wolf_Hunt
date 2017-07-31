@@ -5,7 +5,7 @@
 Sim::World::World()
 {
 	GridCount = 10;
-	WorldSize = 2000;
+	WorldSize = 1000;
 	GridSize = WorldSize / GridCount;
 	this->WorldGrid = new GridNode*[GridCount];
 	for (int i = 0; i < GridCount; ++i)
@@ -45,6 +45,7 @@ void Sim::World::Update()
 			}
 			else
 			{
+				WorldGrid[EntityList[i]->GridID.X][EntityList[i]->GridID.Y].RemoveEntity(EntityList[i].get());
 				EntityList[i].reset();
 			}
 		}
@@ -80,14 +81,14 @@ void Sim::World::ResolveCollisions()
 			std::vector<Entity *> NearEntites = GetNearbyEntities(Vector<int>(XGrid,YGrid));
 			for (int i = 0; i < NearEntites.size() - 1; ++i)
 			{
-				if (EntityList[i]->Alive)
+				if (NearEntites[i]->Alive)
 				{
 					for (int j = i + 1; j < NearEntites.size(); ++j)
 					{
-						if (EntityList[j]->Alive)
+						if (NearEntites[j]->Alive)
 						{
-							Entity * entA = EntityList[i].get();
-							Entity * entB = EntityList[j].get();
+							Entity * entA = NearEntites[i];
+							Entity * entB = NearEntites[j];
 							//Collision detect
 							Vector<float> Diff = entA->Pos - entB->Pos;
 							float SqrdDistacnce = Diff.Dot(Diff);
@@ -95,14 +96,14 @@ void Sim::World::ResolveCollisions()
 							if (SqrdDistacnce < CombinedSize * CombinedSize)
 							{
 								//Collision happened
-								Vector<float> Force = (entA->Pos - entA->PosOld) + (entB->Pos - entB->PosOld);
+								Vector<float> Speed = (entA->Pos - entA->PosOld) + (entB->Pos - entB->PosOld);
 								Diff = (Diff / sqrtf(SqrdDistacnce)) * CombinedSize;
 								//Move them to touching
 								
 								entA->Pos += Diff * 0.5;
 								entB->Pos -= Diff * 0.5;
-								entA->PosOld += Diff * 0.5;
-								entB->PosOld -= Diff * 0.5;
+								entA->PosOld += Diff * 0.25;
+								entB->PosOld -= Diff * 0.25;
 							}
 						}
 					}
