@@ -1,19 +1,21 @@
 #include "Entity.h"
 #include "World.h"
-
+#include <math.h>
 
 Sim::Entity::Entity(World * wrld)
 {
 	this->WorldObj = wrld;
-	LinearDamp = 0.90;
+	LinearDamp = 0.0000001;
+	AngularDamp = .005;
 	Acceleration = Vector<float>();
+	Alive = true;
 }
 
 
 Sim::Entity::~Entity()
 {
 	//clean up
-	WorldObj->WorldGrid[GridID.X][GridID.Y].RemoveEntity(this);
+	//WorldObj->WorldGrid[GridID.X][GridID.Y].RemoveEntity(this);
 }
 
 void Sim::Entity::SetLocation(Vector<float> pos)
@@ -30,8 +32,27 @@ void Sim::Entity::SetLocation(Vector<float> pos)
 	}
 }
 
+void Sim::Entity::ApplyFriction()
+{
+	if (OnFloor)
+	{
+		auto Velocity = GetVelocity();
+		float Mag = sqrt(Velocity.Dot(Velocity));
+		//Cubic friction
+		float FrictionFactor = pow(LinearDamp, WorldObj->DeltaTime*100);
+		Acceleration = Acceleration * (fmaxf(0, (2 - exp(Mag / 50))));
+		if (Mag < 0.01)
+		{
+			this->Pos = this->PosOld;
+		}
+		//RotAcc -= RotVel * abs(RotVel) * AngularDamp;
+		RotVel *= pow(AngularDamp,WorldObj->DeltaTime);
+	}
+}
 void Sim::Entity::Update()
 {
+	ApplyFriction();
+	Acceleration.Z -= WorldObj->Gravity;
 	Intergrate();
 	EnforceBoundry();
 }
@@ -57,13 +78,30 @@ void Sim::Entity::EnforceBoundry()
 		Pos.Y = WorldObj->WorldSize;
 		PosOld.Y = WorldObj->WorldSize;
 	}
+	if (Pos.Z <= 0)
+	{
+		Pos.Z = 0;
+		OnFloor = true;
+	}
+	else
+	{
+		OnFloor = false;
+	}
 }
 void Sim::Entity::Intergrate()
 {
 	//Linear intergration
 	Vector<float> NewOld = this->Pos;
-	Pos += ((Pos - PosOld) * LinearDamp) + (Acceleration * WorldObj->DeltaTime * WorldObj->DeltaTime);
+	Pos += (Pos - PosOld) + (Acceleration * WorldObj->DeltaTime * WorldObj->DeltaTime);
 	PosOld = NewOld;
+	Rot += RotVel * WorldObj->DeltaTime;
+	RotVel += RotAcc * WorldObj->DeltaTime;
+	while (abs(Rot) > PI)
+	{
+		int dir = 2 * (Rot / abs(Rot));
+		Rot -= PI * dir;
+	}
+	RotAcc = 0;
 	Acceleration = Vector<float>();
 }
 void Sim::Entity::Kill()
@@ -74,4 +112,29 @@ void Sim::Entity::Kill()
 void Sim::Entity::ApplyForce(Vector<float> force)
 {
 	this->Acceleration += force / Mass;
+}
+
+float Sim::Entity::NormaliseAngle(float angle)
+{
+	while (abs(angle) > PI)
+	{
+		angle -= PI * 2 * (angle / abs(angle));
+	}
+	return angle;
+}
+
+void Sim::Entity::ApplyMoment(float moment)
+{
+	//Model moment of inertia as mass
+	RotAcc += moment / Mass;
+}
+
+//Aprox
+Sim::Vector<float> Sim::Entity::GetVelocity()
+{
+	return (Pos - PosOld) / WorldObj->DeltaTime;
+}
+void Sim::Entity::Collision(Entity * ent)
+{
+	
 }

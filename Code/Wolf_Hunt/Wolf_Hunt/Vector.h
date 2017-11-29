@@ -5,8 +5,8 @@ namespace Sim {
 	class Vector
 	{
 	public:
-		type X, Y;
-		Vector(type x = 0,type y = 0);
+		type X, Y, Z;
+		Vector(type x = 0, type y = 0, type z = 0);
 		~Vector();
 		Vector operator+(Vector other);
 		void operator+=(Vector other);
@@ -22,10 +22,11 @@ namespace Sim {
 	};
 };
 template<class type>
-Sim::Vector<type>::Vector(type x, type y)
+Sim::Vector<type>::Vector(type x, type y, type z)
 {
 	X = x;
 	Y = y;
+	Z = z;
 }
 
 
@@ -37,7 +38,7 @@ Sim::Vector<type>::~Vector()
 template<class type>
 float Sim::Vector<type>::Dot(Vector<type> other)
 {
-	return (X * other.X) + (Y * other.Y);
+	return (X * other.X) + (Y * other.Y) + (Z * other.Z);
 }
 
 template<class type>
@@ -50,7 +51,7 @@ Sim::Vector<type> Sim::Vector<type>::Normalise()
 template<class type>
 Sim::Vector<type> Sim::Vector<type>::operator+(Vector<type> other)
 {
-return Vector(X + other.X, Y + other.Y);
+return Vector(X + other.X, Y + other.Y, Z + other.Z);
 }
 
 template<class type>
@@ -58,6 +59,7 @@ void Sim::Vector<type>::operator+=(Vector<type> other)
 {
 	X += other.X;
 	Y += other.Y;
+	Z += other.Z;
 }
 template<class type>
 void Sim::Vector<type>::operator-=(Vector<type> other)
@@ -69,13 +71,13 @@ void Sim::Vector<type>::operator-=(Vector<type> other)
 template<class type>
 Sim::Vector<type> Sim::Vector<type>::operator-(Vector<type> other)
 {
-return Vector(X - other.X, Y - other.Y);
+return Vector(X - other.X, Y - other.Y, Z - other.Z);
 }
 
 template<class type>
 Sim::Vector<type> Sim::Vector<type>::operator*(float val)
 {
-	return Vector(X * val, Y * val);
+	return Vector(X * val, Y * val, Z * val);
 }
 template<class type>
 Sim::Vector<type> Sim::Vector<type>::operator/(float val)
@@ -84,17 +86,17 @@ Sim::Vector<type> Sim::Vector<type>::operator/(float val)
 	{
 		return Vector<type>();
 	}
-	return Vector(X / val, Y / val);
+	return Vector(X / val, Y / val, Z / val);
 }
 
 template<class type>
 bool Sim::Vector<type>::operator==(Vector other)
 {
-return (X == other.X) && (Y == other.Y);
+return (X == other.X) && (Y == other.Y) && (Z == other.Z);
 }
 
 template<class type>
 bool Sim::Vector<type>::operator!=(Vector other)
 {
-return (X != other.X) || (Y != other.Y);
+	return (X != other.X) || (Y != other.Y) || (Z != other.Z);
 }

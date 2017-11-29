@@ -27,7 +27,7 @@ void Sim::GridNode::RemoveEntity(Entity * ent)
 		EntityList.pop_back();
 	}
 }
-std::vector<Sim::Entity*> Sim::GridNode::GetEntities()
+std::vector<Sim::Entity*> &Sim::GridNode::GetEntities()
 {
 	return EntityList;
 }

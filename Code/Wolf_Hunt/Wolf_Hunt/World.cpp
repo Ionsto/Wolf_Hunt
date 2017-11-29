@@ -1,19 +1,45 @@
 #include "World.h"
 #include "EntityGrass.h"
 #include <math.h>
+#include "EntitySheep.h"
+#include "EntityWolf.h"
+#include <thread>
+
 
 Sim::World::World()
 {
-	GridCount = 10;
-	WorldSize = 1000;
+	WorldSize = 2000;
 	GridSize = WorldSize / GridCount;
-	this->WorldGrid = new GridNode*[GridCount];
 	for (int i = 0; i < GridCount; ++i)
 	{
-		this->WorldGrid[i] = new GridNode[GridCount];
 		for (int v = 0; v < GridCount; ++v)
 		{
-			this->WorldGrid[i][v] = GridNode(Vector<int>(i,v));
+			this->WorldGrid[i][v] = GridNode(Vector<int>(i, v));
+		}
+	}
+	//Init near grid refrences
+	for (int i = 0; i < GridCount; ++i)
+	{
+		for (int v = 0; v < GridCount; ++v)
+		{
+			const int LookUpDistance = 2;
+			auto Entities = std::vector<std::reference_wrapper<std::vector<Sim::Entity *>>>();
+			for (int x = i; x <= i + LookUpDistance; ++x)
+			{
+				for (int y = v; y <= v + LookUpDistance; ++y)
+				{
+					if (x >= 0 && x < GridCount)
+					{
+						if (y >= 0 && y < GridCount)
+						{
+							auto NEntity = std::ref(WorldGrid[x][y].GetEntities());
+							Entities.push_back(NEntity);
+							//Entities.insert(Entities.end(), WorldGrid[idloc.X][idloc.Y].GetEntities().begin(), WorldGrid[idloc.X][idloc.Y].GetEntities().end());
+						}
+					}
+				}
+			}
+			this->WorldGrid[i][v].NearEntityList = Entities;
 		}
 	}
 	for (int i = 0; i < 2000;++i)
@@ -71,50 +97,130 @@ void Sim::World::ResolveGrid()
 		}
 	}
 }
+inline static void ResolveEntEntCollision(Sim::Entity * entA, Sim::Entity * entB)
+{
+	//Collision detect
+	Sim::Vector<float> Diff = entA->Pos - entB->Pos;
+	float SqrdDistacnce = Diff.Dot(Diff);
+	float CombinedSize = entA->Size + entB->Size;
+	if (SqrdDistacnce < CombinedSize * CombinedSize)
+	{
+		//Collision happened
+		Sim::Vector<float> VAB = (entA->Pos - entA->PosOld) - (entB->Pos - entB->PosOld);
+		const float e = 1;
+		float j = (-(1 + e) * VAB.Dot(Diff)) / (SqrdDistacnce * (1 / entA->Mass + 1 / entB->Mass));
 
-void Sim::World::ResolveCollisions() 
+		float sqrtDistance = sqrtf(SqrdDistacnce);
+		Sim::Vector<float> Translate = (Diff / sqrtDistance) * (CombinedSize - sqrtDistance);
+		//Move them to touching
+		Diff = Diff / sqrtDistance;
+		entA->Pos += Translate * 0.5;
+		entB->Pos -= Translate * 0.5;
+		entA->PosOld += Translate * 0.5;
+		entB->PosOld -= Translate * 0.5;
+		entA->PosOld -= Diff * j;
+		entB->PosOld += Diff * j;
+		entA->Collision(entB);
+		entB->Collision(entA);
+	}
+}
+inline static void ResolveCollisionsListPairs(std::vector<std::reference_wrapper<std::vector<Sim::Entity *>>> & NearEntiteslists, int j)
+{
+	auto outerlist = NearEntiteslists[0].get();
+	for (int x = 0; x < outerlist.size() - 1; ++x)
+	{
+		if (outerlist[x]->Alive)
+		{
+			for (int z = x + 1; z < outerlist.size(); ++z)
+			{
+				if (outerlist[z]->Alive)
+				{
+					ResolveEntEntCollision(outerlist[x], outerlist[z]);
+				}
+			}
+		}
+	}
+}
+void Sim::World::ResolveCollisions()
 {
 	for (int XGrid = 0; XGrid < GridCount; ++XGrid)
 	{
 		for (int YGrid = 0; YGrid < GridCount; ++YGrid)
 		{
-			std::vector<Entity *> NearEntites = GetNearbyEntities(Vector<int>(XGrid,YGrid));
-			if(NearEntites.size() > 0)
+			std::vector<std::reference_wrapper<std::vector<Sim::Entity *>>> & NearEntiteslist = GetNearbyEntities(Vector<int>(XGrid, YGrid));
+			int i = 0;
+			std::vector<std::thread> ThreadPool = std::vector<std::thread>();
+			/*if (NearEntiteslist[0].get().size() > 0)
 			{
-				for (int i = 0; i < NearEntites.size() - 1; ++i)
+				for (int j = 1; j < NearEntiteslist.size(); ++j)
 				{
-					if (NearEntites[i]->Alive)
+					ThreadPool.emplace_back(std::thread(ResolveCollisionsListPairs, NearEntiteslist, j));
+				}
+				//Finally run our inner on inner thread - special case
+				auto outerlist = NearEntiteslist[0].get();
+				for (int x = 0; x < outerlist.size() - 1; ++x)
+				{
+					if (outerlist[x]->Alive)
 					{
-						for (int j = i + 1; j < NearEntites.size(); ++j)
+						for (int z = x + 1; z < outerlist.size(); ++z)
 						{
-							if (NearEntites[j]->Alive)
+							if (outerlist[z]->Alive)
 							{
-								Entity * entA = NearEntites[i];
-								Entity * entB = NearEntites[j];
-								//Collision detect
-								Vector<float> Diff = entA->Pos - entB->Pos;
-								float SqrdDistacnce = Diff.Dot(Diff);
-								float CombinedSize = entA->Size + entB->Size;
-								if (SqrdDistacnce < CombinedSize * CombinedSize)
+								ResolveEntEntCollision(outerlist[x], outerlist[z]);
+							}
+						}
+					}
+				}
+			}
+			for (int j = 0; j < ThreadPool.size(); ++j)
+			{
+				ThreadPool[j].join();
+			}*/
+			for (int j = 0; j < NearEntiteslist.size(); ++j)
+			{
+				if (i != j)
+				{
+					//Check n^2 comparisons, each entity on each entity
+					ResolveCollisionsListed(NearEntiteslist[i], NearEntiteslist[j]);
+				}
+				else
+				{
+					//Check 
+					auto outerlist = NearEntiteslist[i].get();
+					if (outerlist.size() > 0)
+					{
+						for (int x = 0; x < outerlist.size() - 1; ++x)
+						{
+							if (outerlist[x]->Alive)
+							{
+								for (int z = x + 1; z < outerlist.size(); ++z)
 								{
-									//Collision happened
-									Vector<float> VAB = (entA->Pos - entA->PosOld) - (entB->Pos - entB->PosOld);
-									const float e = 1;
-									float j = (-(1 + e) * VAB.Dot(Diff)) / (SqrdDistacnce * (1 / entA->Mass + 1 / entB->Mass));
-
-									float sqrtDistance = sqrtf(SqrdDistacnce);
-									Vector<float> Translate = (Diff / sqrtDistance) * (CombinedSize - sqrtDistance);
-									//Move them to touching
-									Diff = Diff / sqrtDistance;
-									entA->Pos += Translate * 0.5;
-									entB->Pos -= Translate * 0.5;
-									entA->PosOld += Translate * 0.5;
-									entB->PosOld -= Translate * 0.5;
-									entA->PosOld -= Diff * j;
-									entB->PosOld += Diff * j;
+									if (outerlist[z]->Alive)
+									{
+										ResolveEntEntCollision(outerlist[x], outerlist[z]);
+									}
 								}
 							}
 						}
+					}
+				}
+			}
+		}
+	}
+}
+inline void Sim::World::ResolveCollisionsListed(std::vector<Entity *> & lista, std::vector<Entity*> & listb)
+{
+	if (listb.size() > 0)
+	{
+		for (int i = 0; i < lista.size(); ++i)
+		{
+			if (lista[i]->Alive)
+			{
+				for (int j = 0; j < listb.size(); ++j)
+				{
+					if (listb[j]->Alive)
+					{
+						ResolveEntEntCollision(lista[i], listb[j]);
 					}
 				}
 			}
@@ -145,25 +251,43 @@ int Sim::World::AddEntity(std::unique_ptr<Entity> ent)
 	}
 	return -1;
 }
-std::vector<Sim::Entity *> Sim::World::GetNearbyEntities(Vector<int> gridid)
+std::vector<std::reference_wrapper<std::vector<Sim::Entity *>>>& Sim::World::GetNearbyEntities(Vector<int> gridid)
 {
-	const int LookUpDistance = 2;
-	std::vector<Sim::Entity*> Entities = std::vector<Sim::Entity*>();
-	for (int x = -LookUpDistance; x <= LookUpDistance; ++x)
+	return WorldGrid[gridid.X][gridid.Y].NearEntityList;
+}
+Sim::Entity * Sim::World::GetClosestEntity(Entity * ThisEntity)
+{
+	auto complist = GetNearbyEntities(ThisEntity->GridID);
+	Entity * EntityClosest = NULL;
+	float dist = 0;
+	for each (auto slist in complist)
 	{
-		for (int y = -LookUpDistance; y <= LookUpDistance; ++y)
+		auto iter = std::min_element(slist.get().begin(), slist.get().end(), [=](Entity * a, Entity * b) -> bool {
+			//Push the search entity to the back
+			if (a == ThisEntity) { return false; }
+			Vector<float> dissA = a->Pos - ThisEntity->Pos;
+			Vector<float> dissB = b->Pos - ThisEntity->Pos;
+			return dissA.Dot(dissA) < dissB.Dot(dissB);
+		});
+		if (iter != slist.get().end())
 		{
-			Vector<int> idloc = gridid + Vector<int>(x, y);
-			if (idloc.X >= 0 && idloc.X < GridCount)
+			if (EntityClosest == NULL)
 			{
-				if (idloc.Y >= 0 && idloc.Y < GridCount)
+				EntityClosest = *iter;
+				Vector<float> dissA = EntityClosest->Pos - ThisEntity->Pos;
+				dist = dissA.Dot(dissA);
+			}
+			else
+			{
+				auto entb = *iter;
+				Vector<float> dissA = entb->Pos - ThisEntity->Pos;
+				if (dissA.Dot(dissA) < dist)
 				{
-					std::vector<Sim::Entity*> NEntity = WorldGrid[idloc.X][idloc.Y].GetEntities();
-					Entities.insert(std::end(Entities), std::begin(NEntity), std::end(NEntity));
-					//Entities.insert(Entities.end(), WorldGrid[idloc.X][idloc.Y].GetEntities().begin(), WorldGrid[idloc.X][idloc.Y].GetEntities().end());
+					EntityClosest = entb;
+					dist = dissA.Dot(dissA);
 				}
 			}
 		}
 	}
-	return Entities;
+	return EntityClosest;
 }

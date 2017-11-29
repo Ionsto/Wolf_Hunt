@@ -9,12 +9,14 @@ namespace Sim {
 	public:
 		float DeltaTime = 1/60;
 		int WorldSize;
-		int GridCount;
+		static const int GridCount = 8;
 		int GridSize;
 		static const int EntityCount = 2000;
-		Sim::GridNode ** WorldGrid;
+		float Gravity = 9.8;
+		std::array<std::array<Sim::GridNode, GridCount>, GridCount> WorldGrid;
 		//Represents the master list of all entities
 		std::array<std::unique_ptr<Sim::Entity>, EntityCount> EntityList;
+		//static void ResolveCollisionsListPairs(std::vector<std::reference_wrapper<std::vector<Sim::Entity *>>> & NearEntiteslists, int j);
 		Vector<int> GetGridIDs(Vector<float> Pos);
 		World();
 		~World();
@@ -24,7 +26,10 @@ namespace Sim {
 		void ResolveGrid();
 		//Resolve all entity->entity collisions
 		void ResolveCollisions();
+		void ResolveCollisionsListed(std::vector<Entity *> &, std::vector<Entity*> &);
+		//static void ResolveEntEntCollision(Entity * entA,Entity * EntB);
 		int AddEntity(std::unique_ptr<Entity> ent);
-		std::vector<Entity *> GetNearbyEntities(Vector<int> gridid);
+		std::vector<std::reference_wrapper<std::vector<Entity *>>> & GetNearbyEntities(Vector<int> gridid);
+		Entity * GetClosestEntity(Entity * ThisEnt);
 	};
 }

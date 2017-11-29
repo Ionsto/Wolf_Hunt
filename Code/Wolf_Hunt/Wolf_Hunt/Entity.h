@@ -5,16 +5,19 @@ namespace Sim {
 	class Entity
 	{
 	public:
+		const float PI = 3.14159;
 		float LinearDamp;
+		float AngularDamp;
 		Vector<float> Pos;
 		Vector<float> PosOld;
 		Vector<float> Acceleration;
 		float Mass = 1;
 		float Size = 10;
-		float Rot;
-		float RotOld;
-		float RotAcc;
-		bool Alive;
+		float Rot = 0;
+		float RotVel = 0;
+		float RotAcc = 0;
+		bool Alive = true;
+		bool OnFloor = true;
 		//Global ID refrence
 		int Id;
 		World * WorldObj;
@@ -27,7 +30,12 @@ namespace Sim {
 		void EnforceBoundry();
 		virtual void SetLocation(Vector<float> pos);
 		void ApplyForce(Vector<float> force);
+		void ApplyMoment(float moment);
+		virtual void ApplyFriction();
 		//Clean up everything
-		void Kill();
+		virtual void Kill();
+		float NormaliseAngle(float angle);
+		Vector<float> GetVelocity();
+		virtual void Collision(Entity * ent);
 	};
 };

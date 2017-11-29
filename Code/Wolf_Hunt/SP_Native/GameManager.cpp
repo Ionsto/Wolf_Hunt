@@ -1,7 +1,8 @@
 #include "GameManager.h"
 #include "./../Wolf_Hunt/EntitySheep.h"
 #include "./../Wolf_Hunt/EntityWolf.h"
-
+#include "./../Wolf_Hunt/EntityFox.h"
+#include <iostream>
 
 GameManager::GameManager()
 {
@@ -10,37 +11,56 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
+	RenderEngine.release();
 }
 
 void GameManager::Init()
 {
 	WorldInstance = std::make_unique<Sim::World>();
-	Window.create(sf::VideoMode(1000, 1000), "My window");
-	RenderEngine = RenderSystem();
+	Window.create(sf::VideoMode(800, 800), "My window");
+	//Window.create(sf::VideoMode::getFullscreenModes()[0], "Wolf hunt SP", sf::Style::Fullscreen);
+	RenderEngine = std::make_unique<RenderSystem>();
 	Running = true;
-	int id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(Sim::EntitySheep(WorldInstance.get())));
-	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(30, 30));
-	id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(Sim::EntitySheep(WorldInstance.get())));
-	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(20, 20));
-	id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(Sim::EntityWolf(WorldInstance.get())));
+	//int id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(Sim::EntitySheep(WorldInstance.get())));
+	//WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(30, 30));
+	//id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(Sim::EntitySheep(WorldInstance.get())));
+	//WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(20, 20));
+	int id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(Sim::EntityWolf(WorldInstance.get())));
 	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(100, 100));
-
-	for (int i = 0; i < 100; ++i)
+	/*id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(Sim::EntityWolf(WorldInstance.get())));
+	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(150, 100));
+	id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(Sim::EntityWolf(WorldInstance.get())));
+	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(200, 100));
+	id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(Sim::EntityWolf(WorldInstance.get())));
+	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(100, 150));*/
+	for (int i = 0; i < 1500; ++i)
 	{
 		int id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(Sim::EntitySheep(WorldInstance.get())));
+		WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(rand() % WorldInstance->WorldSize, rand() % WorldInstance->WorldSize));
+		((Sim::EntitySheep*)WorldInstance->EntityList[id].get())->NNInstance.Randomise(100);
+		((Sim::EntitySheep*)WorldInstance->EntityList[id].get())->Age += rand() % 40;
+	}
+	for (int i = 0; i < 10; ++i)
+	{
+		int id = WorldInstance->AddEntity(std::make_unique<Sim::EntityFox>(Sim::EntityFox(WorldInstance.get())));
 		WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(rand() % WorldInstance->WorldSize, rand() % WorldInstance->WorldSize));
 	}
 	Mouse = MouseState();
 	Window.setKeyRepeatEnabled(false);
+	std::cout << "Init complete" << std::endl;
+	GameHud = GuiHud(this);
 }
 void GameManager::Update()
 {
+	UpdateCamera();
 	WorldInstance->Update();
+	GameHud.Update();
 }
 void GameManager::Render()
 {
 	Window.clear();
-	RenderEngine.Render(WorldInstance.get(),&Window);
+	RenderEngine->Render(WorldInstance.get(),&Window);
+	GameHud.Render(&Window);
 	Window.display();
 }
 void GameManager::PollInput()
@@ -50,9 +70,9 @@ void GameManager::PollInput()
 
 	// while there are pending events...
 	Mouse.Update();
-	for each(auto keyset in KeyArray)
+	for(int i = 0; i < KeyArray.size();++i)
 	{
-		keyset.Update();
+		KeyArray[i].Update();
 	}
 	while (Window.pollEvent(event))
 	{
@@ -96,7 +116,6 @@ void GameManager::PollInput()
 			if (event.key.code >= 0 && event.key.code <= 255)
 			{
 				this->KeyArray[event.key.code].Key = ButtonState::GoingDown;
-				//std::cout << "KeyDown" << std::endl;
 			}
 			break;
 		case sf::Event::KeyReleased:
@@ -122,9 +141,24 @@ void GameManager::PollInput()
 			{
 				if (WorldInstance->EntityList[i]->Alive)
 				{
+					{
+						auto selected = dynamic_cast<Sim::EntityLiving*>(WorldInstance->EntityList[i].get());
+						if (selected != NULL)
+						{
+							Sim::Vector<float> Diff = WorldInstance->EntityList[i]->Pos - (RenderEngine->CameraLocation + Mouse.Location);
+							float Distdot = Diff.Dot(Diff);
+							if (Distdot < 10 * 10)
+							{
+								//Debug infomation
+								std::cout << "Type:" << selected->Type << std::endl;
+								std::cout << "Health:" << selected->Health << std::endl;
+								std::cout << "Energy:" << selected->Energy << std::endl;
+							}
+						}
+					}
 					if (dynamic_cast<Sim::EntityWolf*>(WorldInstance->EntityList[i].get()) != NULL)
 					{
-						Sim::Vector<float> Diff = WorldInstance->EntityList[i]->Pos - Mouse.Location;
+						Sim::Vector<float> Diff = WorldInstance->EntityList[i]->Pos - (RenderEngine->CameraLocation + Mouse.Location);
 						float Distdot = Diff.Dot(Diff);
 						if (Distdot < 10 * 10)
 						{
@@ -141,30 +175,99 @@ void GameManager::PollInput()
 	{
 		if (Selected != NULL)
 		{
-			Selected->TargetLocation = Mouse.Location;
+			Selected->TargetLocation = Mouse.Location + RenderEngine->CameraLocation;
 		}
 	}
-	float CameraSpeed = 100;
-	if (KeyArray[sf::Keyboard::A].Key == ButtonState::Down)
+	if (KeyArray[sf::Keyboard::Space].Key == ButtonState::GoingDown)
 	{
-		RenderEngine.CameraLocation.X += CameraSpeed * WorldInstance->DeltaTime;
+		if (Selected != NULL)
+		{
+			Selected->UseLeap();
+		}
 	}
-	if (KeyArray[sf::Keyboard::D].Key == ButtonState::Down)
+	if (KeyArray[sf::Keyboard::E].Key == ButtonState::GoingDown)
 	{
-		RenderEngine.CameraLocation.X -= CameraSpeed * WorldInstance->DeltaTime;
+		if (Selected != NULL)
+		{
+			Selected->UseBite();
+		}
+	}
+	if (KeyArray[sf::Keyboard::Q].Key == ButtonState::GoingDown)
+	{
+		if (Selected != NULL)
+		{
+			Selected->UseGrab();
+		}
 	}
 }
+void GameManager::UpdateCamera()
+{
+	float CameraSpeed = 500;
+	if (KeyArray[sf::Keyboard::Escape].Key == ButtonState::GoingDown)
+	{
+		Running = false;
+	}
+	if (KeyArray[sf::Keyboard::Escape].Key == ButtonState::GoingDown)
+	{
+		Running = false;
+	}
+	if (KeyArray[sf::Keyboard::A].Key == ButtonState::Down || KeyArray[sf::Keyboard::A].Key == ButtonState::GoingDown)
+	{
+		RenderEngine->CameraLocation.X -= CameraSpeed * WorldInstance->DeltaTime;
+	}
+	if (KeyArray[sf::Keyboard::D].Key == ButtonState::Down || KeyArray[sf::Keyboard::D].Key == ButtonState::GoingDown)
+	{
+		RenderEngine->CameraLocation.X += CameraSpeed * WorldInstance->DeltaTime;
+	}
+	if (KeyArray[sf::Keyboard::W].Key == ButtonState::Down || KeyArray[sf::Keyboard::W].Key == ButtonState::GoingDown)
+	{
+		RenderEngine->CameraLocation.Y -= CameraSpeed * WorldInstance->DeltaTime;
+	}
+	if (KeyArray[sf::Keyboard::S].Key == ButtonState::Down || KeyArray[sf::Keyboard::S].Key == ButtonState::GoingDown)
+	{
+		RenderEngine->CameraLocation.Y += CameraSpeed * WorldInstance->DeltaTime;
+	}
+	if (RenderEngine->CameraLocation.X < 0)
+	{
+		RenderEngine->CameraLocation.X = 0;
+	}
+	if (RenderEngine->CameraLocation.X  > WorldInstance->WorldSize - RenderEngine->CameraSize.X)
+	{
+		RenderEngine->CameraLocation.X = WorldInstance->WorldSize - RenderEngine->CameraSize.X;
+	}
+	if (RenderEngine->CameraLocation.Y < 0)
+	{
+		RenderEngine->CameraLocation.Y = 0;
+	}
+	if (RenderEngine->CameraLocation.Y  > WorldInstance->WorldSize - RenderEngine->CameraSize.Y)
+	{
+		RenderEngine->CameraLocation.Y = WorldInstance->WorldSize - RenderEngine->CameraSize.Y;
+	}
+}
+float fpscounter = 0;
 void GameManager::MainLoop()
 {
-	WorldInstance->DeltaTime = 0.000001;
+	std::cout << "Start mainloop" << std::endl;
+	WorldInstance->DeltaTime = 1 / 60.0;
 	sf::Time elapsed = clock.restart();
 	while (Running)
 	{
 		PollInput();
+		//std::cout << "Finish Poll" << std::endl;
 		Update();
+		//std::cout << "Finish Update" << std::endl;
 		Render();
+		//std::cout << "Finish render" << std::endl;
 		sf::Time elapsed = clock.restart();
+//#ifndef _DEBUG
 		WorldInstance->DeltaTime = elapsed.asSeconds();
+//#endif
+		fpscounter += WorldInstance->DeltaTime;
+		if (fpscounter >= 0.5)
+		{
+			std::cout << 1 / WorldInstance->DeltaTime << std::endl;
+			fpscounter = 0;
+		}
 	}
 	Window.close();
 }

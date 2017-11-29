@@ -1,5 +1,4 @@
 #pragma once
-#include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 #include "KeyState.h"
 #include <Array>
@@ -10,8 +9,9 @@
 class GameManager
 {
 public:
+	GuiHud GameHud;
 	sf::Clock clock;
-	RenderSystem RenderEngine;
+	std::unique_ptr<RenderSystem> RenderEngine;
 	bool Running;
 	MouseState Mouse;
 	std::array<KeyState, 255> KeyArray;
@@ -25,5 +25,6 @@ public:
 	void PollInput();
 	void Render();
 	void MainLoop();
+	void UpdateCamera();
 };
 

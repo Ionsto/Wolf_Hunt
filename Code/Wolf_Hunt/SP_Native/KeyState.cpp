@@ -10,6 +10,7 @@ KeyState::KeyState()
 
 KeyState::~KeyState()
 {
+
 }
 //0 = down, 1 = up
 void KeyState::Update()
