@@ -1,7 +1,7 @@
 #include "EntityHunter.h"
 #include "World.h"
 #include "Entity.h"
-
+#include <iostream>
 
 Sim::EntityHunter::EntityHunter(World * world) : EntityLiving(world)
 {
@@ -34,11 +34,10 @@ void Sim::EntityHunter::TryHold(Entity * entity)
 			//Generate constraint
 			Vector<float> Diff = Pos - entity->Pos;
 			float DistSqrd = Diff.Dot(Diff);
+			std::cout << sqrt(DistSqrd) << std::endl;
 			if (DistSqrd < HoldDistance * HoldDistance)
 			{
-				HoldConstraint.entityA = this;
 				HoldConstraint.SetEntityB(entity);
-				HoldConstraint.entityB = entity;
 				HoldConstraint.Length = sqrt(DistSqrd);
 
 			}
@@ -57,8 +56,7 @@ void Sim::EntityHunter::TryEat(Entity * entity)
 			float DistSqrd = Diff.Dot(Diff);
 			if (DistSqrd < EatDistance * EatDistance)
 			{
-				EatingConstraint.entityA = this;
-				EatingConstraint.entityB = entity;
+				EatingConstraint.SetEntityB(entity);
 				EatingConstraint.Length = sqrt(DistSqrd);
 			}
 		}

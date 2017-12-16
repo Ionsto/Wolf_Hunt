@@ -269,7 +269,7 @@ Sim::Entity * Sim::World::GetClosestEntity(Entity * ThisEntity)
 			Vector<float> dissB = b->Pos - ThisEntity->Pos;
 			return dissA.Dot(dissA) < dissB.Dot(dissB);
 		});
-		if (iter != slist.get().end())
+		if (iter != slist.get().end() && *iter != ThisEntity)
 		{
 			if (EntityClosest == nullptr)
 			{

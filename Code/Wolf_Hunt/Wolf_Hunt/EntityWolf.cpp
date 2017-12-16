@@ -2,6 +2,7 @@
 #include "EntitySheep.h"
 #include "EntityCorpse.h"
 #include "World.h"
+#include <iostream>
 
 Sim::EntityWolf::EntityWolf(Sim::World * wrld) : Sim::EntityHunter(wrld)
 {
@@ -121,7 +122,7 @@ void Sim::EntityWolf::UseGrab()
 	{
 		//Attempt a grab
 		auto EntityClosest = WorldObj->GetClosestEntity(this);
-		if (EntityClosest != nullptr)
+		if (EntityClosest != nullptr)F
 		{
 			Vector<float> Diff = Pos - EntityClosest->Pos;
 			float DistSqrd = Diff.Dot(Diff);
@@ -135,11 +136,14 @@ void Sim::EntityWolf::UseGrab()
 			}
 		}
 	}*/
-	if (HoldConstraint.ConnectionExists())
+	std::cout << "Grab" << std::endl;
+	if (!HoldConstraint.ConnectionExists())
 	{
+		std::cout << "Try grab" << std::endl;
 		auto EntityClosest = WorldObj->GetClosestEntity(this);
 		if (EntityClosest != nullptr)
 		{
+			std::cout << "Neighbor found" << std::endl;
 			TryHold(EntityClosest);
 		}
 	}

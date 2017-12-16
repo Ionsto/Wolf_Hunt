@@ -25,10 +25,13 @@ Sim::Constraint::~Constraint()
 
 void Sim::Constraint::Update()
 {
-	int Itter = 10;
-	for (int i = 0; i < Itter; ++i)
+	if (this->ConnectionExists())
 	{
-		Resolve(WorldObj->DeltaTime / Itter);
+		int Itter = 10;
+		for (int i = 0; i < Itter; ++i)
+		{
+			Resolve(WorldObj->DeltaTime / Itter);
+		}
 	}
 }
 
