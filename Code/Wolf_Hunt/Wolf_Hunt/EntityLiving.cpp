@@ -19,24 +19,24 @@ Sim::EntityLiving::~EntityLiving()
 
 void Sim::EntityLiving::Update()
 {
+	UpdateTargets();
 	Entity::Update();
 	AIUpdateTimer += WorldObj->DeltaTime;
 	if (AIUpdateTimer >= AIUpdateMax) {
 		UpdateAI();
 		AIUpdateTimer = 0;
 	}
-	UpdateTargets();
 	Energy = fminf(100, fmaxf(0, Energy));
 }
 void Sim::EntityLiving::UpdateAI()
 {
-	//NULL
+	//nullptr
 }
 void Sim::EntityLiving::ApplyWalkForce(Vector<float> Force)
 {
 	Force.Z = 0;
 	//Double sqrt :(
-	float DirectionCoheasion = sqrt(abs(Force.Normalise().Dot(Vector<float>(cos(Rot),sin(Rot)))));
+	float DirectionCoheasion = 1;// sqrt(abs(Force.Normalise().Dot(Vector<float>(cos(Rot), sin(Rot)))));
 	float AccelerationDamp = 1;
 	if (Energy < 10)
 	{

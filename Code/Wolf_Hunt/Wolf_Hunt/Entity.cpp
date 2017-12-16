@@ -5,10 +5,11 @@
 Sim::Entity::Entity(World * wrld)
 {
 	this->WorldObj = wrld;
-	LinearDamp = 0.0000001;
+	LinearDamp = 0.0001;
 	AngularDamp = .005;
 	Acceleration = Vector<float>();
 	Alive = true;
+	DeathCallbacks = std::vector<std::function<void(Entity*)>*>();
 }
 
 
@@ -16,6 +17,10 @@ Sim::Entity::~Entity()
 {
 	//clean up
 	//WorldObj->WorldGrid[GridID.X][GridID.Y].RemoveEntity(this);
+	for (auto callback : DeathCallbacks)
+	{
+		(*callback)(this);
+	}
 }
 
 void Sim::Entity::SetLocation(Vector<float> pos)
@@ -40,10 +45,11 @@ void Sim::Entity::ApplyFriction()
 		float Mag = sqrt(Velocity.Dot(Velocity));
 		//Cubic friction
 		float FrictionFactor = pow(LinearDamp, WorldObj->DeltaTime*100);
-		Acceleration = Acceleration * (fmaxf(0, (2 - exp(Mag / 50))));
+		//Acceleration = Acceleration * (fmaxf(0, (2 - exp(Mag / 50))));
+		this->PosOld += (this->Pos - this->PosOld) * FrictionFactor;
 		if (Mag < 0.01)
 		{
-			this->Pos = this->PosOld;
+			//this->Pos = this->PosOld;
 		}
 		//RotAcc -= RotVel * abs(RotVel) * AngularDamp;
 		RotVel *= pow(AngularDamp,WorldObj->DeltaTime);
@@ -137,4 +143,16 @@ Sim::Vector<float> Sim::Entity::GetVelocity()
 void Sim::Entity::Collision(Entity * ent)
 {
 	
+}
+void Sim::Entity::RegisterDeath(std::function<void(Entity*)> * func)
+{
+	this->DeathCallbacks.push_back(func);
+}
+void Sim::Entity::UnRegisterDeath(std::function<void(Entity*)> * func)
+{
+	auto location = std::find(this->DeathCallbacks.begin(), this->DeathCallbacks.end(), func);
+	if (location != this->DeathCallbacks.end())
+	{
+		this->DeathCallbacks.erase(location);
+	}
 }

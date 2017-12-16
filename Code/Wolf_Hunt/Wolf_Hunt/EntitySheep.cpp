@@ -61,15 +61,15 @@ void Sim::EntitySheep::UpdateAI()
 		{
 			if (entity != this)
 			{
-				if (dynamic_cast<EntityHunter*>(entity) != NULL)
+				if (dynamic_cast<EntityHunter*>(entity) != nullptr)
 				{
 					++WolfCount;
 				}
-				if (dynamic_cast<EntitySheep*>(entity) != NULL)
+				if (dynamic_cast<EntitySheep*>(entity) != nullptr)
 				{
 					++SheepCount;
 				}
-				if (dynamic_cast<EntityGrass*>(entity) != NULL)
+				if (dynamic_cast<EntityGrass*>(entity) != nullptr)
 				{
 
 					if (dynamic_cast<EntityGrass*>(entity)->Grown)
@@ -117,7 +117,7 @@ void Sim::EntitySheep::UpdateAI()
 			{
 				auto NearEnt = dynamic_cast<EntitySheep*>(WorldObj->GetClosestEntity(this));
 				//Check if you are a sheep
-				if (NearEnt != NULL)
+				if (NearEnt != nullptr)
 				{
 					if (Energy > MateEnergyCost)
 					{
@@ -127,7 +127,7 @@ void Sim::EntitySheep::UpdateAI()
 						if (diff.Dot(diff) < MinDistance)
 						{
 							auto child = std::make_unique<EntitySheep>(WorldObj);
-							child->Energy = MateEnergyCost * 2;
+							child->Energy = MateEnergyCost * 2 - SheepCost;
 							int id = WorldObj->AddEntity(move(child));
 							if (id != -1)
 							{

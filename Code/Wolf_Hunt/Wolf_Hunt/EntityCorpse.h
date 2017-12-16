@@ -5,7 +5,7 @@ namespace Sim {
 		public EntityLiving//Ironic
 	{
 	public:
-		float MaxDecayTime = 1000;
+		float MaxDecayTime = 30;
 		float DecayTimer = 0;
 		EntityCorpse(World * world);
 		~EntityCorpse();

@@ -3,7 +3,6 @@
 #include "EntityHunter.h"
 namespace Sim {
 	class EntityFox :
-		public EntityLiving,
 		public EntityHunter
 	{
 	protected:

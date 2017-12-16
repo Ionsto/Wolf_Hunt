@@ -134,7 +134,7 @@ void GameManager::PollInput()
 	if (Mouse.Left == ButtonState::GoingDown)
 	{
 		//Search
-		Selected = NULL;
+		Selected = nullptr;
 		for (int i = 0; i < WorldInstance->EntityCount; ++i)
 		{
 			if (WorldInstance->EntityList[i])
@@ -143,7 +143,7 @@ void GameManager::PollInput()
 				{
 					{
 						auto selected = dynamic_cast<Sim::EntityLiving*>(WorldInstance->EntityList[i].get());
-						if (selected != NULL)
+						if (selected != nullptr)
 						{
 							Sim::Vector<float> Diff = WorldInstance->EntityList[i]->Pos - (RenderEngine->CameraLocation + Mouse.Location);
 							float Distdot = Diff.Dot(Diff);
@@ -156,7 +156,7 @@ void GameManager::PollInput()
 							}
 						}
 					}
-					if (dynamic_cast<Sim::EntityWolf*>(WorldInstance->EntityList[i].get()) != NULL)
+					if (dynamic_cast<Sim::EntityWolf*>(WorldInstance->EntityList[i].get()) != nullptr)
 					{
 						Sim::Vector<float> Diff = WorldInstance->EntityList[i]->Pos - (RenderEngine->CameraLocation + Mouse.Location);
 						float Distdot = Diff.Dot(Diff);
@@ -173,28 +173,28 @@ void GameManager::PollInput()
 
 	if (Mouse.Right == ButtonState::GoingDown)
 	{
-		if (Selected != NULL)
+		if (Selected != nullptr)
 		{
 			Selected->TargetLocation = Mouse.Location + RenderEngine->CameraLocation;
 		}
 	}
 	if (KeyArray[sf::Keyboard::Space].Key == ButtonState::GoingDown)
 	{
-		if (Selected != NULL)
+		if (Selected != nullptr)
 		{
 			Selected->UseLeap();
 		}
 	}
 	if (KeyArray[sf::Keyboard::E].Key == ButtonState::GoingDown)
 	{
-		if (Selected != NULL)
+		if (Selected != nullptr)
 		{
 			Selected->UseBite();
 		}
 	}
 	if (KeyArray[sf::Keyboard::Q].Key == ButtonState::GoingDown)
 	{
-		if (Selected != NULL)
+		if (Selected != nullptr)
 		{
 			Selected->UseGrab();
 		}
@@ -263,7 +263,7 @@ void GameManager::MainLoop()
 		WorldInstance->DeltaTime = elapsed.asSeconds();
 //#endif
 		fpscounter += WorldInstance->DeltaTime;
-		if (fpscounter >= 0.5)
+		if (fpscounter >= 0.2)
 		{
 			std::cout << 1 / WorldInstance->DeltaTime << std::endl;
 			fpscounter = 0;

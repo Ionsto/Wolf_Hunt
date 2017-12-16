@@ -23,7 +23,7 @@ GuiHud::~GuiHud()
 
 void GuiHud::Update()
 {
-	if (gm->Selected != NULL)
+	if (gm->Selected != nullptr)
 	{
 		Health.setSize(sf::Vector2f(gm->Selected->Health, 20));
 		Energy.setSize(sf::Vector2f(gm->Selected->Energy, 20));
@@ -33,7 +33,7 @@ void GuiHud::Update()
 
 void GuiHud::Render(sf::RenderWindow * window)
 {
-	if (gm->Selected != NULL)
+	if (gm->Selected != nullptr)
 	{
 		window->draw(Health);
 		window->draw(Energy);

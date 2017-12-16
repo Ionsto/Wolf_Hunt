@@ -3,8 +3,9 @@
 #include "EntitySheep.h"
 #include "World.h"
 #include <algorithm>
+#include "Vector.h"
 
-Sim::EntityFox::EntityFox(World * world) : EntityLiving(world)
+Sim::EntityFox::EntityFox(World * world) : EntityHunter(world)
 {
 	Type = Fox;
 	MaxAccelerationForward = 500;
@@ -42,8 +43,15 @@ void Sim::EntityFox::Update()
 				TargetLocation.Y = -1;
 			}
 		}
+		else
+		{
+			float OffsetEdge = 10;
+			TargetLocation += Vector<float>((rand() % 200) - 100, (rand() % 200) - 100,0);
+			TargetLocation.X = std::min<float>(std::max<float>(OffsetEdge, TargetLocation.X), WorldObj->WorldSize - OffsetEdge);
+			TargetLocation.Y = std::min<float>(std::max<float>(OffsetEdge, TargetLocation.Y), WorldObj->WorldSize - OffsetEdge);
+		}
 	}
-	EntityLiving::Update();
+	EntityHunter::Update();
 }
 void Sim::EntityFox::UpdateAI()
 {
@@ -57,7 +65,7 @@ void Sim::EntityFox::UpdateAI()
 	switch (AIState)
 	{
 	case Chase:
-		if (EntityClosest != NULL)
+		if (EntityClosest != nullptr)
 		{
 			this->TargetLocation = EntityClosest->Pos;
 		}
@@ -70,18 +78,18 @@ void Sim::EntityFox::UpdateAI()
 
 void Sim::EntityFox::Collision(Entity * ent)
 {
-	if (dynamic_cast<EntitySheep*>(ent) != NULL)
+	if (dynamic_cast<EntitySheep*>(ent) != nullptr)
 	{
 		if (Attacking)
 		{
 			ent->Kill();
 		}
 	}
-	if (dynamic_cast<EntityCorpse*>(ent) != NULL)
+	if (dynamic_cast<EntityCorpse*>(ent) != nullptr)
 	{
 		if (Attacking)
 		{
-			if (dynamic_cast<EntityCorpse*>(ent) != NULL)
+			if (dynamic_cast<EntityCorpse*>(ent) != nullptr)
 			{
 				float Delta = fmin(((EntityCorpse*)ent)->Energy, EatSpeed) * WorldObj->DeltaTime;
 				Energy += Delta;

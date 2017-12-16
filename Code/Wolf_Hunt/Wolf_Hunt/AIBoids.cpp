@@ -37,7 +37,7 @@ Sim::Vector<float> Sim::AIBoids::CalculateRepulsion(Entity * Self, std::vector<s
 		for each (auto ent in entlist.get())
 		{
 			if (ent == Self) {continue;}
-			if (dynamic_cast<Sim::EntitySheep*>(ent) != NULL) {
+			if (dynamic_cast<Sim::EntitySheep*>(ent) != nullptr) {
 				Vector<float> dist = Self->Pos - ent->Pos;
 				Acc += dist *(1 / dist.Dot(dist));
 			}
@@ -53,7 +53,7 @@ Sim::Vector<float> Sim::AIBoids::CalculateClump(Entity * Self, std::vector<std::
 		for each (auto ent in entlist.get())
 		{
 			if (ent == Self) { continue; }
-			if (dynamic_cast<Sim::EntitySheep*>(ent) != NULL) {
+			if (dynamic_cast<Sim::EntitySheep*>(ent) != nullptr) {
 				Vector<float> dist = ent->Pos - Self->Pos;
 				Acc += dist / sqrt(dist.Dot(dist));
 			}
@@ -69,7 +69,7 @@ Sim::Vector<float> Sim::AIBoids::CalculateCoheasion(Entity * Self, std::vector<s
 		for each (auto ent in entlist.get())
 		{
 			if (ent == Self) { continue; }
-			if (dynamic_cast<Sim::EntitySheep*>(ent) != NULL) {
+			if (dynamic_cast<Sim::EntitySheep*>(ent) != nullptr) {
 				Vector<float> dist = ent->Pos - Self->Pos;
 				Result += (ent->Pos - ent->PosOld) / sqrt(dist.Dot(dist));
 			}
@@ -87,7 +87,7 @@ Sim::Vector<float> Sim::AIBoids::CalculateFlee(Entity * Self, std::vector<std::r
 		for each (auto ent in entlist.get())
 		{
 			if (ent == Self) { continue; }
-			if (dynamic_cast<EntityHunter*>(ent) != NULL) {
+			if (dynamic_cast<EntityHunter*>(ent) != nullptr) {
 				Vector<float> dist = Self->Pos - ent->Pos;
 				Acc += dist / sqrtf(dist.Dot(dist));
 			}

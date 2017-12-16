@@ -8,7 +8,7 @@ public:
 	sf::RectangleShape Energy;
 	sf::RectangleShape LeapTime;
 	GameManager * gm;
-	GuiHud(GameManager * gm = NULL);
+	GuiHud(GameManager * gm = nullptr);
 	~GuiHud();
 	void Update();
 	void Render(sf::RenderWindow * window);

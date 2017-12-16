@@ -4,7 +4,6 @@
 #include "Constraint.h"
 namespace Sim {
 	class EntityWolf :
-		public EntityLiving,
 		public EntityHunter
 	{
 	public:

@@ -8,7 +8,7 @@
 
 Sim::World::World()
 {
-	WorldSize = 2000;
+	WorldSize = 5000;
 	GridSize = WorldSize / GridCount;
 	for (int i = 0; i < GridCount; ++i)
 	{
@@ -258,7 +258,7 @@ std::vector<std::reference_wrapper<std::vector<Sim::Entity *>>>& Sim::World::Get
 Sim::Entity * Sim::World::GetClosestEntity(Entity * ThisEntity)
 {
 	auto complist = GetNearbyEntities(ThisEntity->GridID);
-	Entity * EntityClosest = NULL;
+	Entity * EntityClosest = nullptr;
 	float dist = 0;
 	for each (auto slist in complist)
 	{
@@ -271,7 +271,7 @@ Sim::Entity * Sim::World::GetClosestEntity(Entity * ThisEntity)
 		});
 		if (iter != slist.get().end())
 		{
-			if (EntityClosest == NULL)
+			if (EntityClosest == nullptr)
 			{
 				EntityClosest = *iter;
 				Vector<float> dissA = EntityClosest->Pos - ThisEntity->Pos;

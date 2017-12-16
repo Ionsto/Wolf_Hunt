@@ -17,7 +17,7 @@ public:
 	std::array<KeyState, 255> KeyArray;
 	sf::RenderWindow Window;
 	std::unique_ptr<Sim::World> WorldInstance;
-	Sim::EntityWolf * Selected = NULL;
+	Sim::EntityWolf * Selected = nullptr;
 	GameManager();
 	~GameManager();
 	void Init();

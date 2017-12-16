@@ -43,7 +43,7 @@ void RenderSystem::Render(Sim::World * world, sf::RenderWindow * window)
 			if (world->EntityList[i]->Alive)
 			{
 				//Render
-				if (dynamic_cast<Sim::EntityLiving*>(world->EntityList[i].get()) != NULL)
+				if (dynamic_cast<Sim::EntityLiving*>(world->EntityList[i].get()) != nullptr)
 				{
 					Sim::EntityLiving* ent = (Sim::EntityLiving*)world->EntityList[i].get();
 					switch (ent->Type)
@@ -68,7 +68,7 @@ void RenderSystem::Render(Sim::World * world, sf::RenderWindow * window)
 						break;
 					}
 				}
-				if (dynamic_cast<Sim::EntityGrass*>(world->EntityList[i].get()) != NULL)
+				if (dynamic_cast<Sim::EntityGrass*>(world->EntityList[i].get()) != nullptr)
 				{
 					Grass.setPosition(world->EntityList[i].get()->Pos.X - CameraLocation.X, world->EntityList[i].get()->Pos.Y - CameraLocation.Y);
 					if (dynamic_cast<Sim::EntityGrass*>(world->EntityList[i].get())->Grown)
@@ -81,7 +81,7 @@ void RenderSystem::Render(Sim::World * world, sf::RenderWindow * window)
 					}
 					window->draw(Grass);
 				}
-				if (dynamic_cast<Sim::EntityCorpse*>(world->EntityList[i].get()) != NULL)
+				if (dynamic_cast<Sim::EntityCorpse*>(world->EntityList[i].get()) != nullptr)
 				{
 					Corpse.setPosition(world->EntityList[i].get()->Pos.X - CameraLocation.X, world->EntityList[i].get()->Pos.Y - CameraLocation.Y);
 					window->draw(Corpse);

@@ -3,7 +3,7 @@
 #include "EntityCorpse.h"
 #include "World.h"
 
-Sim::EntityWolf::EntityWolf(Sim::World * wrld) : Sim::EntityLiving(wrld)
+Sim::EntityWolf::EntityWolf(Sim::World * wrld) : Sim::EntityHunter(wrld)
 {
 	Type = EntityTypes::Wolf;
 	TargetLocation = Vector<float>(-1,-1); 
@@ -25,7 +25,7 @@ Sim::EntityWolf::~EntityWolf()
 
 void Sim::EntityWolf::Update()
 {
-	EntityLiving::Update();
+	EntityHunter::Update();
 	LeapCooldownTimer -= WorldObj->DeltaTime;
 	if (LeapCooldownTimer < 0)
 	{
@@ -42,7 +42,7 @@ void Sim::EntityWolf::Update()
 	}
 	if (OnFloor)
 	{
-		if (Leaping) 
+		if (Leaping)
 		{
 			Attacking = false;
 		}
@@ -65,14 +65,10 @@ void Sim::EntityWolf::Update()
 			}
 		}
 	}
-	if (Grabbing)
-	{
-		BiteConstraint.Update();
-	}
 }
 void Sim::EntityWolf::UpdateAI()
 {
-	EntityLiving::UpdateAI();
+	EntityHunter::UpdateAI();
 }
 
 void Sim::EntityWolf::SetLocation(Vector<float> pos)
@@ -100,10 +96,24 @@ void Sim::EntityWolf::UseBite()
 	BiterCooldownTimer = 0;
 	Attacking = true;
 	Eating = true;
+
+	if (EatingConstraint.ConnectionExists())
+	{
+		auto EntityClosest = WorldObj->GetClosestEntity(this);
+		if (EntityClosest != nullptr)
+		{
+			TryEat(EntityClosest);
+		}
+	}
+	else
+	{
+		EatingConstraint.SetEntityB(nullptr);
+	}
+	
 }
 void Sim::EntityWolf::UseGrab()
 {
-	if (Grabbing)
+	/*if (Grabbing)
 	{
 		Grabbing = false;
 	}
@@ -111,7 +121,7 @@ void Sim::EntityWolf::UseGrab()
 	{
 		//Attempt a grab
 		auto EntityClosest = WorldObj->GetClosestEntity(this);
-		if (EntityClosest != NULL)
+		if (EntityClosest != nullptr)
 		{
 			Vector<float> Diff = Pos - EntityClosest->Pos;
 			float DistSqrd = Diff.Dot(Diff);
@@ -124,23 +134,37 @@ void Sim::EntityWolf::UseGrab()
 				BiteConstraint.Length = sqrt(DistSqrd);
 			}
 		}
+	}*/
+	if (HoldConstraint.ConnectionExists())
+	{
+		auto EntityClosest = WorldObj->GetClosestEntity(this);
+		if (EntityClosest != nullptr)
+		{
+			TryHold(EntityClosest);
+		}
+	}
+	else
+	{
+		HoldConstraint.SetEntityB(nullptr);
 	}
 }
 
 void Sim::EntityWolf::Collision(Entity * entity)
 {
-	if (dynamic_cast<EntitySheep*>(entity) != NULL)
+	
+	/*
+	if (dynamic_cast<EntitySheep*>(entity) != nullptr)
 	{
 		if (Attacking)
 		{
 			entity->Kill();
 		}
 	}
-	if (dynamic_cast<EntityCorpse*>(entity) != NULL)
+	if (dynamic_cast<EntityCorpse*>(entity) != nullptr)
 	{
 		if (Eating)
 		{
-			if (dynamic_cast<EntityCorpse*>(entity) != NULL)
+			if (dynamic_cast<EntityCorpse*>(entity) != nullptr)
 			{
 				float Delta = fmin(((EntityCorpse*)entity)->Energy, EatSpeed) * WorldObj->DeltaTime;
 				Energy += Delta;
@@ -148,4 +172,5 @@ void Sim::EntityWolf::Collision(Entity * entity)
 			}
 		}
 	}
+	*/
 }

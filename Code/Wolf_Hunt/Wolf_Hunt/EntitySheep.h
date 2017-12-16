@@ -9,7 +9,8 @@ namespace Sim {
 	public:
 		float Age = 0;
 		float AgeMax = 80;
-		float MateEnergyCost = 20;
+		float MateEnergyCost = 30;
+		float SheepCost = 10;
 		int MateCounter = 0;
 		AIBoids BoidsInstance;
 		AINeuralNetwork NNInstance;

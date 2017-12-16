@@ -1,5 +1,7 @@
 #pragma once
 #include "Vector.h"
+#include <vector>
+#include <functional>
 namespace Sim {
 	class World;
 	class Entity
@@ -18,6 +20,7 @@ namespace Sim {
 		float RotAcc = 0;
 		bool Alive = true;
 		bool OnFloor = true;
+		std::vector<std::function<void(Entity*)>*> DeathCallbacks;
 		//Global ID refrence
 		int Id;
 		World * WorldObj;
@@ -37,5 +40,7 @@ namespace Sim {
 		float NormaliseAngle(float angle);
 		Vector<float> GetVelocity();
 		virtual void Collision(Entity * ent);
+		void RegisterDeath(std::function<void(Entity*)>*);
+		void UnRegisterDeath(std::function<void(Entity*)>*);
 	};
 };

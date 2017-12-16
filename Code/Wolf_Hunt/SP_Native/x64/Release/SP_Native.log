@@ -1,19 +1,6 @@
-﻿  GameManager.cpp
-d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\Entity.h(8): warning C4305: 'initializing': truncation from 'double' to 'const float'
-d:\github\wolf_hunt\code\wolf_hunt\sp_native\..\Wolf_Hunt\World.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\github\wolf_hunt\code\wolf_hunt\sp_native\..\Wolf_Hunt\EntityWolf.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
-GameManager.cpp(39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-GameManager.cpp(46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-GameManager.cpp(87): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-GameManager.cpp(88): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-GameManager.cpp(99): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-GameManager.cpp(100): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-GameManager.cpp(103): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-GameManager.cpp(104): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-GameManager.cpp(251): warning C4305: '=': truncation from 'double' to 'float'
-  Generating code
-  51 of 869 functions ( 5.9%) were compiled, the rest were copied from previous compilation.
+﻿  Generating code
+  53 of 1059 functions ( 5.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    10 functions had inline decision re-evaluated but remain unchanged
+    14 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   SP_Native.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Release\SP_Native.exe
