@@ -1,7 +1,4 @@
-﻿  EntityHunter.cpp
-d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\Entity.h(10): warning C4305: 'initializing': truncation from 'double' to 'const float'
-d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\World.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
-  EntityWolf.cpp
+﻿  EntityWolf.cpp
 d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\Entity.h(10): warning C4305: 'initializing': truncation from 'double' to 'const float'
 d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\EntityWolf.h(13): warning C4305: 'initializing': truncation from 'double' to 'float'
 d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\World.h(15): warning C4305: 'initializing': truncation from 'double' to 'float'
