@@ -9,6 +9,7 @@ namespace Sim {
 	public:
 		float LeapCooldown = 5;
 		float LeapCooldownTimer = 0;
+		float BiteDamage = 100;
 		//How long a bite is
 		float BiteTime = 0.2;
 		//Time between starts of bites

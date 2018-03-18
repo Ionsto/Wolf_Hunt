@@ -4,6 +4,8 @@
 
 Sim::EntityCorpse::EntityCorpse(World * world) : EntityLiving(world)
 {
+	Type = EntityTypes::Corpse;
+	WorldObj->WorldRender.GetCircle(IDRenderObject).Colour = 1;
 }
 
 
@@ -19,6 +21,6 @@ void Sim::EntityCorpse::Update()
 	Energy = fmaxf(Energy, 0);
 	if (Energy <= 0)
 	{
-		Kill();
+		Entity::Kill();
 	}
 }

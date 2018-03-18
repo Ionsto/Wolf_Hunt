@@ -3,34 +3,36 @@
 Sim::AINeuralNetwork::AINeuralNetwork()
 {
 	Layers.push_back(std::vector<AINode>());
-	Layers.push_back(std::vector<AINode>());
-	Layers.push_back(std::vector<AINode>());
 
 	//Input psedo nodes
-	Layers[0].push_back(AINode(0));
-	Layers[0].push_back(AINode(0));
-	Layers[0].push_back(AINode(0));
-	Layers[0].push_back(AINode(0));
-	Layers[0].push_back(AINode(0));
+	Layers[0].emplace_back(AINode(0));
+	Layers[0].emplace_back(AINode(0));
+	Layers[0].emplace_back(AINode(0));
+	Layers[0].emplace_back(AINode(0));
+	Layers[0].emplace_back(AINode(0));
 	//Layers[0].push_back(AINode(0));
-	
-	//Hidden
-	Layers[1].push_back(AINode(Layers[0].size() + 1));
-	Layers[1].push_back(AINode(Layers[0].size() + 1));
-	Layers[1].push_back(AINode(Layers[0].size() + 1));
-	Layers[1].push_back(AINode(Layers[0].size() + 1));
+	for (int l = 0; l < 0; ++l)
+	{
+		Layers.push_back(std::vector<AINode>());
+		for (int n = 0; n < 5; ++n)
+		{
+			//Hidden
+			Layers[l + 1].emplace_back(AINode(Layers[l-1].size() + 1));
+		}
+	}
 
+	Layers.push_back(std::vector<AINode>());
 	//Output
 	//State node psedo one hot softmax
-	Layers[2].push_back(AINode(Layers[1].size() + 1));
-	Layers[2].push_back(AINode(Layers[1].size() + 1));
-	Layers[2].push_back(AINode(Layers[1].size() + 1));
+	Layers.back().emplace_back(AINode((Layers.end() - 2)->size() + 1));
+	Layers.back().emplace_back(AINode((Layers.end() - 2)->size() + 1));
+	Layers.back().emplace_back(AINode((Layers.end() - 2)->size() + 1));
 	//Boid nodes	
-	Layers[2].push_back(AINode(Layers[1].size() + 1));//rep
-	Layers[2].push_back(AINode(Layers[1].size() + 1));//clump
-	Layers[2].push_back(AINode(Layers[1].size() + 1));//coehs
-	Layers[2].push_back(AINode(Layers[1].size() + 1));//flee
-	Layers[2].push_back(AINode(Layers[1].size() + 1));//wall aversion
+	Layers.back().emplace_back(AINode((Layers.end() - 2)->size() + 1));//rep
+	Layers.back().emplace_back(AINode((Layers.end() - 2)->size() + 1));//clump
+	Layers.back().emplace_back(AINode((Layers.end() - 2)->size() + 1));//coehs
+	Layers.back().emplace_back(AINode((Layers.end() - 2)->size() + 1));//flee
+	Layers.back().emplace_back(AINode((Layers.end() - 2)->size() + 1));//wall aversion
 }
 
 

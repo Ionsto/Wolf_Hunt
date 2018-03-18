@@ -9,7 +9,7 @@ namespace Sim
 		std::vector<std::vector<AINode>> Layers;
 		std::vector<float> Outputs;
 		AINeuralNetwork();
-		~AINeuralNetwork();
+		virtual ~AINeuralNetwork();
 		void Update(std::vector<float> Inputs);
 		std::vector<float> GetOutput();
 		void Splice(AINeuralNetwork network);

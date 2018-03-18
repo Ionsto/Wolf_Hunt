@@ -1,9 +1,10 @@
 #pragma once
-class GeoBox : public GeoBox
+#include "GeoObject.h"
+class GeoBox : public GeoObject
 {
 public:
 	GeoBox();
-	~GeoBox();
-	virtual void * GetData() override;
+	virtual ~GeoBox();
+	virtual void Render() override;
 };
 

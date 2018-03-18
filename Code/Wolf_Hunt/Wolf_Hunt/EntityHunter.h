@@ -3,20 +3,21 @@
 #include "EntityLiving.h"
 #include "EntityCorpse.h"
 #include "Constraint.h"
+#include <memory>
 
 namespace Sim {
 	class EntityHunter : public EntityLiving
 	{
 	public:
-		float EatSpeed = 100;
+		float EatSpeed = 10;
 		bool Attacking = false;
 		bool Eating = false;
 		float EatDistance;
 		float HoldDistance;
-		Constraint EatingConstraint;
-		Constraint HoldConstraint;
+		std::unique_ptr<Constraint> EatingConstraint;
+		std::unique_ptr<Constraint> HoldConstraint;
 		EntityHunter(Sim::World * wrld);
-		~EntityHunter();
+		virtual ~EntityHunter();
 		virtual void Update() override;
 		void TryHold(Entity * entity);
 		void TryEat(Entity * entity);

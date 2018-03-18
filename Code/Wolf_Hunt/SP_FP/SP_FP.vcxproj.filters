@@ -19,6 +19,12 @@
     <Filter Include="Header Files\RenderEngine">
       <UniqueIdentifier>{ce792bef-d04f-4a21-9923-35e84c712290}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\RenderEngine\Geo">
+      <UniqueIdentifier>{5df52cf9-1e71-4a38-930f-2c48e7813a30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RenderEngine\Render">
+      <UniqueIdentifier>{d8cc3c43-07dd-422e-a5e5-64224099b370}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -49,6 +55,15 @@
       <Filter>Source Files\RenderEngine</Filter>
     </ClCompile>
     <ClCompile Include="GeoTriangle.cpp">
+      <Filter>Source Files\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSheep.cpp">
+      <Filter>Source Files\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -75,10 +90,31 @@
       <Filter>Header Files\RenderEngine</Filter>
     </ClInclude>
     <ClInclude Include="GeoObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\RenderEngine</Filter>
     </ClInclude>
     <ClInclude Include="GeoTriangle.h">
+      <Filter>Header Files\RenderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSheep.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderRay.h">
+      <Filter>Header Files\RenderEngine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderScene.h">
+      <Filter>Header Files\RenderEngine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderCamera.h">
+      <Filter>Header Files\RenderEngine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderObject.h">
+      <Filter>Header Files\RenderEngine\Geo</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderObjectCircle.h">
+      <Filter>Header Files\RenderEngine\Geo</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderObjectLine.h">
+      <Filter>Header Files\RenderEngine\Geo</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

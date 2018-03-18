@@ -2,7 +2,7 @@
 
 int main(int argc, char ** args)
 {
-	GameManager * gm = new GameManager();
+	SP_Native::GameManager * gm = new SP_Native::GameManager();
 	gm->Init();
 	gm->MainLoop();
 	delete gm;

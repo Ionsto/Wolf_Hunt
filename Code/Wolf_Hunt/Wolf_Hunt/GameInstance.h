@@ -4,7 +4,7 @@ namespace Sim {
 	{
 	public:
 		GameInstance();
-		~GameInstance();
+		virtual ~GameInstance();
 		virtual void Update();
 	};
 }

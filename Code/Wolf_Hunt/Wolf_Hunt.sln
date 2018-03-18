@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SP_Native", "SP_Native\SP_N
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SP_FP", "SP_FP\SP_FP.vcxproj", "{A192A781-4412-48C0-AF56-AB3C9DD49168}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderTest", "RenderTest\RenderTest.vcxproj", "{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -55,6 +57,18 @@ Global
 		{A192A781-4412-48C0-AF56-AB3C9DD49168}.Release|x64.Build.0 = Release|x64
 		{A192A781-4412-48C0-AF56-AB3C9DD49168}.Release|x86.ActiveCfg = Release|Win32
 		{A192A781-4412-48C0-AF56-AB3C9DD49168}.Release|x86.Build.0 = Release|Win32
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.Debug|x64.ActiveCfg = Debug|x64
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.Debug|x64.Build.0 = Debug|x64
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.Debug|x86.ActiveCfg = Debug|Win32
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.Debug|x86.Build.0 = Debug|Win32
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.DebugMem|x64.ActiveCfg = Debug|x64
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.DebugMem|x64.Build.0 = Debug|x64
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.DebugMem|x86.ActiveCfg = Debug|Win32
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.DebugMem|x86.Build.0 = Debug|Win32
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.Release|x64.ActiveCfg = Release|x64
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.Release|x64.Build.0 = Release|x64
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.Release|x86.ActiveCfg = Release|Win32
+		{EBDA54EB-D7BE-48D9-95B1-FE5C4BDCECFE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

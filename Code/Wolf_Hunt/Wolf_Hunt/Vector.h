@@ -8,17 +8,18 @@ namespace Sim {
 		type X, Y, Z;
 		Vector(type x = 0, type y = 0, type z = 0);
 		~Vector();
-		Vector operator+(Vector other);
-		void operator+=(Vector other);
-		void operator-=(Vector other);
-		Vector operator-(Vector other);
-		Vector operator*(float val);
-		Vector operator/(float val);
-		float Dot(Vector other);
-		Vector Normalise();
+		inline Vector operator+(const Vector& other);
+		inline void operator+=(const Vector&  other);
+		inline void operator-=(const Vector&  other);
+		inline Vector operator-(const Vector&  other);
+		inline Vector operator*(float val);
+		inline Vector operator/(float val);
+		inline float Dot(const Vector& other);
+		inline float DotXY(const Vector& other);
+		inline Vector Normalise();
 		//Strict equality
-		bool operator!=(Vector check);
-		bool operator==(Vector check);
+		inline bool operator!=(const Vector&  check);
+		inline bool operator==(const Vector&  check);
 	};
 };
 template<class type>
@@ -36,9 +37,15 @@ Sim::Vector<type>::~Vector()
 }
 
 template<class type>
-float Sim::Vector<type>::Dot(Vector<type> other)
+float Sim::Vector<type>::Dot(const Vector<type> & other)
 {
 	return (X * other.X) + (Y * other.Y) + (Z * other.Z);
+}
+
+template<class type>
+float Sim::Vector<type>::DotXY(const Vector<type> & other)
+{
+	return (X * other.X) + (Y * other.Y);
 }
 
 template<class type>
@@ -49,27 +56,28 @@ Sim::Vector<type> Sim::Vector<type>::Normalise()
 }
 
 template<class type>
-Sim::Vector<type> Sim::Vector<type>::operator+(Vector<type> other)
+Sim::Vector<type> Sim::Vector<type>::operator+(const Vector<type> & other)
 {
-return Vector(X + other.X, Y + other.Y, Z + other.Z);
+	return Vector(X + other.X, Y + other.Y, Z + other.Z);
 }
 
 template<class type>
-void Sim::Vector<type>::operator+=(Vector<type> other)
+void Sim::Vector<type>::operator+=(const Vector<type> & other)
 {
 	X += other.X;
 	Y += other.Y;
 	Z += other.Z;
 }
 template<class type>
-void Sim::Vector<type>::operator-=(Vector<type> other)
+void Sim::Vector<type>::operator-=(const Vector<type> & other)
 {
 	X -= other.X;
 	Y -= other.Y;
+	Z -= other.Z;
 }
 
 template<class type>
-Sim::Vector<type> Sim::Vector<type>::operator-(Vector<type> other)
+Sim::Vector<type> Sim::Vector<type>::operator-(const Vector<type> & other)
 {
 return Vector(X - other.X, Y - other.Y, Z - other.Z);
 }
@@ -90,13 +98,13 @@ Sim::Vector<type> Sim::Vector<type>::operator/(float val)
 }
 
 template<class type>
-bool Sim::Vector<type>::operator==(Vector other)
+bool Sim::Vector<type>::operator==(const Vector<type> & other)
 {
 return (X == other.X) && (Y == other.Y) && (Z == other.Z);
 }
 
 template<class type>
-bool Sim::Vector<type>::operator!=(Vector other)
+bool Sim::Vector<type>::operator!=(const Vector<type> & other)
 {
 	return (X != other.X) || (Y != other.Y) || (Z != other.Z);
 }

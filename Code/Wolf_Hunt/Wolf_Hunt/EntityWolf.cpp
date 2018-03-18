@@ -8,14 +8,15 @@ Sim::EntityWolf::EntityWolf(Sim::World * wrld) : Sim::EntityHunter(wrld)
 {
 	Type = EntityTypes::Wolf;
 	TargetLocation = Vector<float>(-1,-1); 
-	Size = 10;
 	MaxAccelerationForward = 500;
 	MaxAccelerationBack = 200;
 	LeapPower = 7000;
-	LeapPowerVertical = 300;
+	LeapPowerVertical = 400;
 	EnergyLossPerAcc = 2 / 500.0;
-	BiteConstraint = Constraint();
-	BiteConstraint.WorldObj = wrld;
+	HoldConstraint->entityA = this;
+	EatingConstraint->entityA = this;
+	std::cout << (int)this << "\n";
+	WorldObj->WorldRender.GetCircle(IDRenderObject).Colour = 5;
 }
 
 
@@ -52,7 +53,7 @@ void Sim::EntityWolf::Update()
 			Vector<float> Diff = TargetLocation - Pos;
 			Diff = Diff * 5;
 			float CloseDistSqrd = 20 * 20;
-			if (Diff.Dot(Diff) > CloseDistSqrd)
+			if (Diff.DotXY(Diff) > CloseDistSqrd)
 			{
 				TargetAcceleration = Diff;
 				//ApplyWalkForce(Diff);
@@ -86,7 +87,7 @@ void Sim::EntityWolf::UseLeap()
 		LeapCooldownTimer = LeapCooldown;
 		Vector<float> force = Vector<float>(cos(Rot) * LeapPower, sin(Rot) * LeapPower, LeapPowerVertical);
 		ApplyForce(force);
-		Energy -= sqrt(force.Dot(force)) * EnergyLossPerAcc;
+		Energy -= sqrt(force.DotXY(force)) * EnergyLossPerAcc;
 		Attacking = true;
 		Leaping = true;
 		OnFloor = false;
@@ -98,46 +99,28 @@ void Sim::EntityWolf::UseBite()
 	Attacking = true;
 	Eating = true;
 
-	if (EatingConstraint.ConnectionExists())
+	if (!EatingConstraint->ConnectionExists())
 	{
 		auto EntityClosest = WorldObj->GetClosestEntity(this);
-		if (EntityClosest != nullptr)
+		if (dynamic_cast<EntityCorpse*>(EntityClosest) != nullptr)
 		{
-			TryEat(EntityClosest);
+			if (EntityClosest != nullptr)
+			{
+				TryEat(EntityClosest);
+			}
 		}
 	}
 	else
 	{
-		EatingConstraint.SetEntityB(nullptr);
+		EatingConstraint->SetEntityB(nullptr);
 	}
 	
 }
 void Sim::EntityWolf::UseGrab()
 {
-	/*if (Grabbing)
-	{
-		Grabbing = false;
-	}
-	else
-	{
-		//Attempt a grab
-		auto EntityClosest = WorldObj->GetClosestEntity(this);
-		if (EntityClosest != nullptr)F
-		{
-			Vector<float> Diff = Pos - EntityClosest->Pos;
-			float DistSqrd = Diff.Dot(Diff);
-			const float DistanceToGrab = 25;
-			if (DistSqrd < DistanceToGrab * DistanceToGrab)
-			{
-				BiteConstraint.entityA = this;
-				BiteConstraint.entityB = EntityClosest;
-				Grabbing = true;
-				BiteConstraint.Length = sqrt(DistSqrd);
-			}
-		}
-	}*/
+
 	std::cout << "Grab" << std::endl;
-	if (!HoldConstraint.ConnectionExists())
+	if (!HoldConstraint->ConnectionExists())
 	{
 		std::cout << "Try grab" << std::endl;
 		auto EntityClosest = WorldObj->GetClosestEntity(this);
@@ -149,21 +132,21 @@ void Sim::EntityWolf::UseGrab()
 	}
 	else
 	{
-		HoldConstraint.SetEntityB(nullptr);
+		HoldConstraint->SetEntityB(nullptr);
 	}
 }
 
 void Sim::EntityWolf::Collision(Entity * entity)
 {
 	
-	/*
+	
 	if (dynamic_cast<EntitySheep*>(entity) != nullptr)
 	{
 		if (Attacking)
 		{
 			entity->Kill();
 		}
-	}
+	}/*
 	if (dynamic_cast<EntityCorpse*>(entity) != nullptr)
 	{
 		if (Eating)

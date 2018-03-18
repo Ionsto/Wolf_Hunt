@@ -90,6 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <AdditionalDependencies>OpenGL32.lib;GLU32.lib;gameplay.lib;gameplay-deps.lib;XInput.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -117,6 +118,9 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -128,6 +132,7 @@
     <ClInclude Include="AIBoids.h" />
     <ClInclude Include="AINeuralNetwork.h" />
     <ClInclude Include="AINode.h" />
+    <ClInclude Include="ComponentID.h" />
     <ClInclude Include="Constraint.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityCorpse.h" />
@@ -139,8 +144,13 @@
     <ClInclude Include="EntityWolf.h" />
     <ClInclude Include="GameInstance.h" />
     <ClInclude Include="GridNode.h" />
+    <ClInclude Include="RenderComponents.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SPGameInstance.h" />
+    <ClInclude Include="SwapList.h" />
+    <ClInclude Include="SystemCollision.h" />
+    <ClInclude Include="SystemEntityAI.h" />
+    <ClInclude Include="SystemRender.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
@@ -160,6 +170,9 @@
     <ClCompile Include="GameInstance.cpp" />
     <ClCompile Include="GridNode.cpp" />
     <ClCompile Include="SPGameInstance.cpp" />
+    <ClCompile Include="SystemCollision.cpp" />
+    <ClCompile Include="SystemEntityAI.cpp" />
+    <ClCompile Include="SystemRender.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>

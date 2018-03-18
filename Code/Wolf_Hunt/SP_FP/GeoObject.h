@@ -3,7 +3,7 @@ class GeoObject
 {
 public:
 	GeoObject();
-	~GeoObject();
-	virtual void* GetData() abstract;
+	virtual ~GeoObject();
+	virtual void Render() abstract;
 };
 

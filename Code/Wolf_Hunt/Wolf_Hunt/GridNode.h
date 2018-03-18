@@ -14,7 +14,7 @@ namespace Sim {
 		std::vector<std::reference_wrapper<std::vector<Sim::Entity *>>> NearEntityList;
 		GridNode();
 		GridNode(Vector<int> loc);
-		~GridNode();
+		virtual ~GridNode();
 		void AddEntity(Entity * entity);
 		void RemoveEntity(Entity * entity);
 		std::vector<Entity*> &GetEntities();

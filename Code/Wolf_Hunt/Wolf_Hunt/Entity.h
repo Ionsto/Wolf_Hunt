@@ -2,14 +2,21 @@
 #include "Vector.h"
 #include <vector>
 #include <functional>
+#include "ComponentID.h"
 namespace Sim {
 	class World;
 	class Entity
 	{
+	protected:
 	public:
+		ComponentIDRenderObject IDRenderObject;
+		ComponentIDCollision IDCollision;
+		enum EntityTypes {
+			Other, Wolf, Sheep, Corpse, Fox
+		} Type;
 		const float PI = 3.14159;
-		float LinearDamp;
-		float AngularDamp;
+		static constexpr float LinearDamp = 1e-10;
+		static constexpr float AngularDamp = .005;
 		Vector<float> Pos;
 		Vector<float> PosOld;
 		Vector<float> Acceleration;
@@ -26,8 +33,9 @@ namespace Sim {
 		World * WorldObj;
 		//
 		Vector<int> GridID;
+		Entity();
 		Entity(World * wrld);
-		~Entity();
+		virtual ~Entity();
 		virtual void Update();
 		void Intergrate();
 		void EnforceBoundry();

@@ -70,12 +70,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)\..\..\SFML-2.4.2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\..\..\SFML-2.4.2\lib;$(SolutionDir)$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\..\..\SFML-2.4.2\include;$(SolutionDir)\..\..\glew-2.1.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\..\..\SFML-2.4.2\lib;$(SolutionDir)$(Platform)\$(Configuration)\;$(SolutionDir)\..\..\GLEW-2.1.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(SolutionDir)\..\..\SFML-2.4.2\lib;$(SolutionDir)$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)\..\..\SFML-2.4.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\..\..\SFML-2.4.2\lib;$(SolutionDir)$(Platform)\$(Configuration)\;$(SolutionDir)\..\..\GLEW-2.1.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\..\..\SFML-2.4.2\include;$(SolutionDir)\..\..\glew-2.1.0\include;D:\Github\Wolf_Hunt\Code\Wolf_Hunt\Wolf_Hunt;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -88,7 +88,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-window.lib;Wolf_Hunt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-window.lib;Wolf_Hunt.lib;glew32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;Wolf_Hunt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;Wolf_Hunt.lib;opengl32.lib;glew32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -135,7 +135,10 @@
     <ClCompile Include="KeyState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MouseState.cpp" />
+    <ClCompile Include="RenderCamera.cpp" />
     <ClCompile Include="RenderEntity.cpp" />
+    <ClCompile Include="RenderScene.cpp" />
+    <ClCompile Include="RenderSheep.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,7 +149,14 @@
     <ClInclude Include="GuiHud.h" />
     <ClInclude Include="KeyState.h" />
     <ClInclude Include="MouseState.h" />
+    <ClInclude Include="RenderCamera.h" />
     <ClInclude Include="RenderEntity.h" />
+    <ClInclude Include="RenderObject.h" />
+    <ClInclude Include="RenderObjectCircle.h" />
+    <ClInclude Include="RenderObjectLine.h" />
+    <ClInclude Include="RenderRay.h" />
+    <ClInclude Include="RenderScene.h" />
+    <ClInclude Include="RenderSheep.h" />
     <ClInclude Include="RenderSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

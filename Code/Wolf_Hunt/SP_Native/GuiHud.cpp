@@ -2,7 +2,7 @@
 #include "GameManager.h"
 
 
-GuiHud::GuiHud(GameManager * newgm)
+SP_Native::GuiHud::GuiHud(GameManager * newgm)
 {
 	gm = newgm;
 	Health = sf::RectangleShape(sf::Vector2f(100,20));
@@ -17,11 +17,11 @@ GuiHud::GuiHud(GameManager * newgm)
 }
 
 
-GuiHud::~GuiHud()
+SP_Native::GuiHud::~GuiHud()
 {
 }
 
-void GuiHud::Update()
+void SP_Native::GuiHud::Update()
 {
 	if (gm->Selected != nullptr)
 	{
@@ -31,7 +31,7 @@ void GuiHud::Update()
 	}
 }
 
-void GuiHud::Render(sf::RenderWindow * window)
+void SP_Native::GuiHud::Render(sf::RenderWindow * window)
 {
 	if (gm->Selected != nullptr)
 	{

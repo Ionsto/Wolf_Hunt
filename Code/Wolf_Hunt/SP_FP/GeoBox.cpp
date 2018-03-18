@@ -2,7 +2,7 @@
 
 
 
-GeoBox::GeoBox()
+GeoBox::GeoBox() : GeoObject()
 {
 }
 
@@ -11,7 +11,6 @@ GeoBox::~GeoBox()
 {
 }
 
-void* GeoBox::GetData()
+void GeoBox::Render()
 {
-
 }

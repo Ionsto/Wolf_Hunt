@@ -7,7 +7,7 @@ namespace Sim {
 	{
 	public:
 		AIBoids();
-		~AIBoids();
+		virtual ~AIBoids();
 		float Repulsion;
 		float Clump;
 		float Coheasion;

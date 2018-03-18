@@ -11,7 +11,6 @@ GameManager::GameManager()
 
 GameManager::~GameManager()
 {
-	RenderEngine.release();
 }
 
 void GameManager::Init()
@@ -19,23 +18,18 @@ void GameManager::Init()
 	WorldInstance = std::make_unique<Sim::World>();
 	Window.create(sf::VideoMode(800, 800), "My window");
 	//Window.create(sf::VideoMode::getFullscreenModes()[0], "Wolf hunt SP", sf::Style::Fullscreen);
-	RenderEngine = std::make_unique<RenderSystem>();
+	RenderEngine = std::make_unique<RenderSystem>(&Window);
+
 	Running = true;
-	//int id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(Sim::EntitySheep(WorldInstance.get())));
+	//int id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(WorldInstance.get()));
 	//WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(30, 30));
-	//id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(Sim::EntitySheep(WorldInstance.get())));
+	//id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(WorldInstance.get()));
 	//WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(20, 20));
-	int id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(Sim::EntityWolf(WorldInstance.get())));
+	int id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(WorldInstance.get()));
 	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(100, 100));
-	/*id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(Sim::EntityWolf(WorldInstance.get())));
-	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(150, 100));
-	id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(Sim::EntityWolf(WorldInstance.get())));
-	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(200, 100));
-	id = WorldInstance->AddEntity(std::make_unique<Sim::EntityWolf>(Sim::EntityWolf(WorldInstance.get())));
-	WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(100, 150));*/
-	for (int i = 0; i < 1500; ++i)
+	/*for (int i = 0; i < 1500; ++i)
 	{
-		int id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(Sim::EntitySheep(WorldInstance.get())));
+		int id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(WorldInstance.get()));
 		WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(rand() % WorldInstance->WorldSize, rand() % WorldInstance->WorldSize));
 		((Sim::EntitySheep*)WorldInstance->EntityList[id].get())->NNInstance.Randomise(100);
 		((Sim::EntitySheep*)WorldInstance->EntityList[id].get())->Age += rand() % 40;
@@ -44,7 +38,7 @@ void GameManager::Init()
 	{
 		int id = WorldInstance->AddEntity(std::make_unique<Sim::EntityFox>(Sim::EntityFox(WorldInstance.get())));
 		WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(rand() % WorldInstance->WorldSize, rand() % WorldInstance->WorldSize));
-	}
+	}*/
 	Mouse = MouseState();
 	Window.setKeyRepeatEnabled(false);
 	std::cout << "Init complete" << std::endl;
@@ -59,7 +53,9 @@ void GameManager::Update()
 void GameManager::Render()
 {
 	Window.clear();
-	RenderEngine->Render(WorldInstance.get(),&Window);
+	RenderEngine->Render(WorldInstance.get());
+	RenderEngine->Render(WorldInstance.get());
+	RenderEngine->Render(WorldInstance.get());
 	GameHud.Render(&Window);
 	Window.display();
 }
@@ -146,20 +142,21 @@ void GameManager::PollInput()
 						if (selected != nullptr)
 						{
 							Sim::Vector<float> Diff = WorldInstance->EntityList[i]->Pos - (RenderEngine->CameraLocation + Mouse.Location);
-							float Distdot = Diff.Dot(Diff);
+							float Distdot = Diff.DotXY(Diff);
 							if (Distdot < 10 * 10)
 							{
 								//Debug infomation
 								std::cout << "Type:" << selected->Type << std::endl;
 								std::cout << "Health:" << selected->Health << std::endl;
 								std::cout << "Energy:" << selected->Energy << std::endl;
+								std::cout << "Pointer:" << (int)selected << std::endl;
 							}
 						}
 					}
 					if (dynamic_cast<Sim::EntityWolf*>(WorldInstance->EntityList[i].get()) != nullptr)
 					{
 						Sim::Vector<float> Diff = WorldInstance->EntityList[i]->Pos - (RenderEngine->CameraLocation + Mouse.Location);
-						float Distdot = Diff.Dot(Diff);
+						float Distdot = Diff.DotXY(Diff);
 						if (Distdot < 10 * 10)
 						{
 							//Select

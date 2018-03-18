@@ -1,6 +1,28 @@
-﻿  Generating code
-  53 of 1059 functions ( 5.0%) were compiled, the rest were copied from previous compilation.
+﻿  GameManager.cpp
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(18): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(19): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\world.h(18): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\constraint.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entitywolf.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(27): warning C4311: 'type cast': pointer truncation from 'Sim::EntityWolf *' to 'int'
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(27): warning C4302: 'type cast': truncation from 'Sim::EntityWolf *' to 'int'
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(97): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(98): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(109): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(110): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(113): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(114): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(166): warning C4311: 'type cast': pointer truncation from 'Sim::EntityLiving *' to 'int'
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(166): warning C4302: 'type cast': truncation from 'Sim::EntityLiving *' to 'int'
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(270): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(274): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_native\gamemanager.cpp(282): warning C4305: '=': truncation from 'double' to 'float'
+  Generating code
+  3 of 1270 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    17 functions had inline decision re-evaluated but remain unchanged
+    4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   SP_Native.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Release\SP_Native.exe

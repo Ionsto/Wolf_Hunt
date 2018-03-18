@@ -37,6 +37,12 @@
     <Filter Include="Header Files\Game">
       <UniqueIdentifier>{18535fb6-cadb-4943-897c-e2a41385e391}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Systems">
+      <UniqueIdentifier>{937a4837-a87e-4097-9ba1-6f17441bd5a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game\Systems">
+      <UniqueIdentifier>{c15aaf9e-0e8a-4380-8d3f-c8d01b353a40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector.h">
@@ -93,6 +99,24 @@
     <ClInclude Include="Constraint.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
+    <ClInclude Include="SystemRender.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentID.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponents.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemEntityAI.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemCollision.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapList.h">
+      <Filter>Header Files\Game\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp">
@@ -142,6 +166,15 @@
     </ClCompile>
     <ClCompile Include="Constraint.cpp">
       <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemRender.cpp">
+      <Filter>Source Files\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemEntityAI.cpp">
+      <Filter>Source Files\Game\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemCollision.cpp">
+      <Filter>Source Files\Game\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

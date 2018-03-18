@@ -4,7 +4,7 @@ class RenderEntity
 {
 public:
 	RenderEntity();
-	~RenderEntity();
-	void Render(Sim::Entity * entity);
+	virtual ~RenderEntity();
+	virtual void Render(Sim::Entity * entity);
 };
 

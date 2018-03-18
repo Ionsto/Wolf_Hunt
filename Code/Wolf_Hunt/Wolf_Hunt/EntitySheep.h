@@ -15,7 +15,7 @@ namespace Sim {
 		AIBoids BoidsInstance;
 		AINeuralNetwork NNInstance;
 		EntitySheep(World * world);
-		~EntitySheep();
+		virtual ~EntitySheep();
 		virtual void Update() override;
 		virtual void UpdateAI() override;
 	};

@@ -1,4 +1,116 @@
-﻿  Generating code
-  All 1059 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  SP_FP.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Release\SP_FP.exe
+﻿  GameManager.cpp
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(18): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(19): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\world.h(18): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\constraint.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entitywolf.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendercamera.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(83): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(84): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(95): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(96): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(99): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(100): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(144): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(152): warning C4311: 'type cast': pointer truncation from 'Sim::EntityLiving *' to 'int'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(152): warning C4302: 'type cast': truncation from 'Sim::EntityLiving *' to 'int'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(158): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(175): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(213): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(213): error C2228: left of '.X' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(217): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(217): error C2228: left of '.X' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(221): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(221): error C2228: left of '.Y' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(225): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(225): error C2228: left of '.Y' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(227): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(227): error C2228: left of '.X' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(229): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(229): error C2228: left of '.X' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(231): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(231): error C2228: left of '.X' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(231): error C2039: 'CameraSize': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(233): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(233): error C2228: left of '.X' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(233): error C2039: 'CameraSize': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(235): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(235): error C2228: left of '.Y' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(237): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(237): error C2228: left of '.Y' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(239): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(239): error C2228: left of '.Y' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(239): error C2039: 'CameraSize': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(241): error C2039: 'CameraLocation': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(241): error C2228: left of '.Y' must have class/struct/union
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(241): error C2039: 'CameraSize': is not a member of 'RenderSystem'
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.h(14): note: see declaration of 'RenderSystem'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\gamemanager.cpp(248): warning C4305: '=': truncation from 'double' to 'float'
+  GuiHud.cpp
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(18): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(19): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\world.h(18): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\constraint.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entitywolf.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendercamera.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+  main.cpp
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(18): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(19): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\world.h(18): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\constraint.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entitywolf.h(14): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendercamera.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+  RenderEntity.cpp
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(18): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(19): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  RenderSheep.cpp
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(18): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(19): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'const float'
+  RenderSystem.cpp
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(18): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(19): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\entity.h(17): warning C4305: 'initializing': truncation from 'double' to 'const float'
+d:\github\wolf_hunt\code\wolf_hunt\wolf_hunt\world.h(18): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendercamera.h(10): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(13): error C2065: 'CameraLocation': undeclared identifier
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(14): error C2065: 'CameraSize': undeclared identifier
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(15): error C2065: 'RenderTargets': undeclared identifier
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(15): error C2228: left of '.emplace_back' must have class/struct/union
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(15): note: type is 'unknown-type'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(16): error C2065: 'RenderTargets': undeclared identifier
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(16): error C2228: left of '.emplace_back' must have class/struct/union
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(16): note: type is 'unknown-type'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(17): error C2065: 'RenderTargets': undeclared identifier
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(17): error C2228: left of '.emplace_back' must have class/struct/union
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(17): note: type is 'unknown-type'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(18): error C2065: 'RenderTargets': undeclared identifier
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(18): error C2228: left of '.emplace_back' must have class/struct/union
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(18): note: type is 'unknown-type'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(19): error C2065: 'RenderTargets': undeclared identifier
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(19): error C2228: left of '.emplace_back' must have class/struct/union
+  d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(19): note: type is 'unknown-type'
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(39): error C2065: 'RenderTargets': undeclared identifier
+d:\github\wolf_hunt\code\wolf_hunt\sp_fp\rendersystem.cpp(39): error C2228: left of '.get' must have class/struct/union

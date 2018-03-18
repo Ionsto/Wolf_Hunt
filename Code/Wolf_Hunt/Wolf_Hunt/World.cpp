@@ -6,10 +6,8 @@
 #include <thread>
 
 
-Sim::World::World()
+Sim::World::World() : WorldRender()
 {
-	WorldSize = 5000;
-	GridSize = WorldSize / GridCount;
 	for (int i = 0; i < GridCount; ++i)
 	{
 		for (int v = 0; v < GridCount; ++v)
@@ -33,7 +31,7 @@ Sim::World::World()
 						if (y >= 0 && y < GridCount)
 						{
 							auto NEntity = std::ref(WorldGrid[x][y].GetEntities());
-							Entities.push_back(NEntity);
+							Entities.emplace_back(NEntity);
 							//Entities.insert(Entities.end(), WorldGrid[idloc.X][idloc.Y].GetEntities().begin(), WorldGrid[idloc.X][idloc.Y].GetEntities().end());
 						}
 					}
@@ -41,12 +39,6 @@ Sim::World::World()
 			}
 			this->WorldGrid[i][v].NearEntityList = Entities;
 		}
-	}
-	for (int i = 0; i < 2000;++i)
-	{
-		//int id = AddEntity(std::make_unique<EntityGrass>(EntityGrass(this)));
-		//EntityList[id]->Pos = Vector<float>(rand() % WorldSize, rand() % WorldSize);
-		//EntityList[id]->PosOld = EntityList[id]->Pos;
 	}
 	ResolveGrid();
 	DeltaTime = 0.001;
@@ -61,6 +53,8 @@ void Sim::World::Update()
 {
 	//Update Grid locations, shuffle them the correct grid location
 	ResolveGrid();
+	WorldRender.RenderScene();
+#pragma omp parallel for
 	for (int i = 0; i < EntityCount; ++i)
 	{
 		if (EntityList[i])
@@ -81,6 +75,7 @@ void Sim::World::Update()
 
 void Sim::World::ResolveGrid()
 {
+#pragma omp parallel for
 	for (int i = 0; i < EntityCount; ++i)
 	{
 		if (EntityList[i])
@@ -101,14 +96,14 @@ inline static void ResolveEntEntCollision(Sim::Entity * entA, Sim::Entity * entB
 {
 	//Collision detect
 	Sim::Vector<float> Diff = entA->Pos - entB->Pos;
-	float SqrdDistacnce = Diff.Dot(Diff);
+	float SqrdDistacnce = Diff.DotXY(Diff);
 	float CombinedSize = entA->Size + entB->Size;
 	if (SqrdDistacnce < CombinedSize * CombinedSize)
 	{
 		//Collision happened
 		Sim::Vector<float> VAB = (entA->Pos - entA->PosOld) - (entB->Pos - entB->PosOld);
 		const float e = 1;
-		float j = (-(1 + e) * VAB.Dot(Diff)) / (SqrdDistacnce * (1 / entA->Mass + 1 / entB->Mass));
+		float j = (-(1 + e) * VAB.DotXY(Diff)) / (SqrdDistacnce * (1 / entA->Mass + 1 / entB->Mass));
 
 		float sqrtDistance = sqrtf(SqrdDistacnce);
 		Sim::Vector<float> Translate = (Diff / sqrtDistance) * (CombinedSize - sqrtDistance);
@@ -143,39 +138,13 @@ inline static void ResolveCollisionsListPairs(std::vector<std::reference_wrapper
 }
 void Sim::World::ResolveCollisions()
 {
+	#pragma omp parallel for
 	for (int XGrid = 0; XGrid < GridCount; ++XGrid)
 	{
 		for (int YGrid = 0; YGrid < GridCount; ++YGrid)
 		{
 			std::vector<std::reference_wrapper<std::vector<Sim::Entity *>>> & NearEntiteslist = GetNearbyEntities(Vector<int>(XGrid, YGrid));
 			int i = 0;
-			std::vector<std::thread> ThreadPool = std::vector<std::thread>();
-			/*if (NearEntiteslist[0].get().size() > 0)
-			{
-				for (int j = 1; j < NearEntiteslist.size(); ++j)
-				{
-					ThreadPool.emplace_back(std::thread(ResolveCollisionsListPairs, NearEntiteslist, j));
-				}
-				//Finally run our inner on inner thread - special case
-				auto outerlist = NearEntiteslist[0].get();
-				for (int x = 0; x < outerlist.size() - 1; ++x)
-				{
-					if (outerlist[x]->Alive)
-					{
-						for (int z = x + 1; z < outerlist.size(); ++z)
-						{
-							if (outerlist[z]->Alive)
-							{
-								ResolveEntEntCollision(outerlist[x], outerlist[z]);
-							}
-						}
-					}
-				}
-			}
-			for (int j = 0; j < ThreadPool.size(); ++j)
-			{
-				ThreadPool[j].join();
-			}*/
 			for (int j = 0; j < NearEntiteslist.size(); ++j)
 			{
 				if (i != j)
@@ -265,9 +234,10 @@ Sim::Entity * Sim::World::GetClosestEntity(Entity * ThisEntity)
 		auto iter = std::min_element(slist.get().begin(), slist.get().end(), [=](Entity * a, Entity * b) -> bool {
 			//Push the search entity to the back
 			if (a == ThisEntity) { return false; }
+			if (b == ThisEntity) { return true; }
 			Vector<float> dissA = a->Pos - ThisEntity->Pos;
 			Vector<float> dissB = b->Pos - ThisEntity->Pos;
-			return dissA.Dot(dissA) < dissB.Dot(dissB);
+			return dissA.DotXY(dissA) < dissB.DotXY(dissB);
 		});
 		if (iter != slist.get().end() && *iter != ThisEntity)
 		{
@@ -275,16 +245,16 @@ Sim::Entity * Sim::World::GetClosestEntity(Entity * ThisEntity)
 			{
 				EntityClosest = *iter;
 				Vector<float> dissA = EntityClosest->Pos - ThisEntity->Pos;
-				dist = dissA.Dot(dissA);
+				dist = dissA.DotXY(dissA);
 			}
 			else
 			{
 				auto entb = *iter;
 				Vector<float> dissA = entb->Pos - ThisEntity->Pos;
-				if (dissA.Dot(dissA) < dist)
+				if (dissA.DotXY(dissA) < dist)
 				{
 					EntityClosest = entb;
-					dist = dissA.Dot(dissA);
+					dist = dissA.DotXY(dissA);
 				}
 			}
 		}

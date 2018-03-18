@@ -2,10 +2,11 @@
 #include <iostream>
 
 
-RenderSystem::RenderSystem()
+SP_Native::RenderSystem::RenderSystem()
 {
-	CameraLocation = Sim::Vector<float>(0, 0);
-	CameraSize = Sim::Vector<float>(800, 800);
+	CameraSize = Sim::Vector<float>(1000, 1000);
+	CameraLocation = CameraSize/2;
+	Scale = 1;
 	WolfTexture = sf::Texture();
 	WolfTexture.loadFromFile("./Res/Entities/Wolf/Static.png");
 	Wolf = sf::Sprite();
@@ -27,14 +28,21 @@ RenderSystem::RenderSystem()
 	Fox = sf::Sprite();
 	Fox.setTexture(FoxTexture, true);
 	Fox.setOrigin(FoxTexture.getSize().x / 2, CorpseTexture.getSize().y / 2);
+	RayHit = sf::CircleShape(2);
 }
 
 
-RenderSystem::~RenderSystem()
+SP_Native::RenderSystem::~RenderSystem()
 {
 }
-void RenderSystem::Render(Sim::World * world, sf::RenderWindow * window)
+void SP_Native::RenderSystem::Render(Sim::World * world, sf::RenderWindow * window)
 {
+	RenderSprites(world, window);
+	RenderRays(world->WorldRender.GetCamera(PlayerCamera), window);
+}
+void SP_Native::RenderSystem::RenderSprites(Sim::World * world, sf::RenderWindow * window)
+{
+	Sim::Vector<float> CameraPos = CameraLocation - (CameraSize / 2);
 	const float PI = 3.14159;
 	for (int i = 0; i < world->EntityCount; ++i)
 	{
@@ -49,44 +57,64 @@ void RenderSystem::Render(Sim::World * world, sf::RenderWindow * window)
 					switch (ent->Type)
 					{
 					case Sim::EntityLiving::EntityTypes::Wolf:
+						Wolf.setScale(Scale, Scale);
 						Wolf.setRotation(ent->Rot * (180.0 / PI));
-						Wolf.setPosition(ent->Pos.X - CameraLocation.X, ent->Pos.Y - CameraLocation.Y);
+						Wolf.setPosition((ent->Pos.X - CameraPos.X)*Scale, (ent->Pos.Y - CameraPos.Y)*Scale);
 						window->draw(Wolf);
 						//render wolf
 						break;
-					case Sim::EntityLiving::EntityTypes::Sheep:
+					/*case Sim::EntityLiving::EntityTypes::Sheep:
 						//render sheep
+						Sheep.setScale(Scale, Scale);
 						Sheep.setRotation(ent->Rot * (180 / PI));
-						Sheep.setPosition(ent->Pos.X - CameraLocation.X, ent->Pos.Y - CameraLocation.Y);
+						Sheep.setPosition((ent->Pos.X - CameraPos.X)*Scale, (ent->Pos.Y - CameraPos.Y)*Scale);
 						window->draw(Sheep);
 						break;
 					case Sim::EntityLiving::EntityTypes::Fox:
 						//render sheep
+						Fox.setScale(Scale, Scale);
 						Fox.setRotation(ent->Rot * (180 / PI));
-						Fox.setPosition(ent->Pos.X - CameraLocation.X, ent->Pos.Y - CameraLocation.Y);
+						Fox.setPosition((ent->Pos.X - CameraPos.X)*Scale, (ent->Pos.Y - CameraPos.Y)*Scale);
 						window->draw(Fox);
 						break;
+					case Sim::EntityCorpse::EntityTypes::Corpse:
+						//render sheep
+						Corpse.setScale(Scale, Scale);
+						Corpse.setRotation(ent->Rot * (180 / PI));
+						Corpse.setPosition((ent->Pos.X - CameraPos.X)*Scale, (ent->Pos.Y - CameraPos.Y)*Scale);
+						window->draw(Corpse);
+						break;*/
 					}
-				}
-				if (dynamic_cast<Sim::EntityGrass*>(world->EntityList[i].get()) != nullptr)
-				{
-					Grass.setPosition(world->EntityList[i].get()->Pos.X - CameraLocation.X, world->EntityList[i].get()->Pos.Y - CameraLocation.Y);
-					if (dynamic_cast<Sim::EntityGrass*>(world->EntityList[i].get())->Grown)
-					{
-						//Grass.setFillColor(sf::Color(0, 255, 0, 255));
-					}
-					else
-					{
-						//Grass.setFillColor(sf::Color(0, 120, 0, 255));
-					}
-					window->draw(Grass);
-				}
-				if (dynamic_cast<Sim::EntityCorpse*>(world->EntityList[i].get()) != nullptr)
-				{
-					Corpse.setPosition(world->EntityList[i].get()->Pos.X - CameraLocation.X, world->EntityList[i].get()->Pos.Y - CameraLocation.Y);
-					window->draw(Corpse);
 				}
 			}
 		}
 	}
+}
+
+sf::Color SP_Native::RenderSystem::RayToRGB(Sim::ComponentRenderRay & ray)
+{
+	static const sf::Color ColourMapping[6] = { sf::Color(255,255,255),sf::Color(255,0,0),sf::Color(0,255,0),sf::Color(0,0,255),sf::Color(255,0,255),sf::Color(255,125,125)};
+	auto rawcolour = ColourMapping[ray.Colour];
+	static const auto maxcolour = ColourMapping[0];
+	float blendfactor = ray.Distance / Sim::ComponentRenderRay::MaxDistance;
+	return sf::Color(((rawcolour.r*(1 - blendfactor)) + (maxcolour.r*blendfactor)),
+		((rawcolour.g*(1 - blendfactor)) + (maxcolour.g*blendfactor)),
+		((rawcolour.b*(1 - blendfactor)) + (maxcolour.b*blendfactor)));
+}
+void SP_Native::RenderSystem::RenderRays(Sim::ComponentRenderCamera & camera, sf::RenderWindow * window)
+{
+	Sim::Vector<float> CameraPos = CameraLocation - (CameraSize / 2);
+	static const float SampleSlice = Sim::ComponentRenderCamera::FOV / (Sim::ComponentRenderCamera::SampleCount);
+	static const float HalfSampleCount = (Sim::ComponentRenderCamera::SampleCount - 1) / 2.0;
+	float RayAngle = camera.Rotation - (SampleSlice*HalfSampleCount);
+	for (int s = 0; s < Sim::ComponentRenderCamera::SampleCount; ++s)
+	{
+		RayAngle += SampleSlice;
+		Sim::Vector<float> RayLocation = (camera.Position +  (Sim::Vector<float>(cos(RayAngle), sin(RayAngle))*camera.Rays[s].Distance));
+		RayHit.setFillColor(RayToRGB(camera.Rays[s]));
+		RayHit.setScale(Scale, Scale);
+		RayHit.setPosition((RayLocation.X - CameraPos.X)*Scale, (RayLocation.Y - CameraPos.Y)*Scale);
+		window->draw(RayHit);
+	}
+
 }

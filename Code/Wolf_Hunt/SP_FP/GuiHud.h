@@ -9,7 +9,7 @@ public:
 	sf::RectangleShape LeapTime;
 	GameManager * gm;
 	GuiHud(GameManager * gm = nullptr);
-	~GuiHud();
+	virtual ~GuiHud();
 	void Update();
 	void Render(sf::RenderWindow * window);
 };

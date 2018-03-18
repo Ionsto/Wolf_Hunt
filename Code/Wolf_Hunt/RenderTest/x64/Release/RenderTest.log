@@ -1,0 +1,12 @@
+﻿  main.cpp
+d:\github\wolf_hunt\code\wolf_hunt\rendertest\main.cpp(24): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\rendertest\main.cpp(36): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\rendertest\main.cpp(38): warning C4244: 'argument': conversion from 'float' to 'const unsigned char', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\rendertest\main.cpp(54): warning C4305: '+=': truncation from 'double' to 'float'
+main.obj : error LNK2001: unresolved external symbol "public: struct Sim::SwapListID __cdecl Sim::SwapList<struct Sim::ComponentRenderCamera>::AddItem(struct Sim::ComponentRenderCamera)" (?AddItem@?$SwapList@UComponentRenderCamera@Sim@@@Sim@@QEAA?AUSwapListID@2@UComponentRenderCamera@2@@Z)
+main.obj : error LNK2001: unresolved external symbol "public: struct Sim::SwapListID __cdecl Sim::SwapList<struct Sim::ComponentRenderCircle>::AddItem(struct Sim::ComponentRenderCircle)" (?AddItem@?$SwapList@UComponentRenderCircle@Sim@@@Sim@@QEAA?AUSwapListID@2@UComponentRenderCircle@2@@Z)
+Wolf_Hunt.lib(SystemRender.obj) : error LNK2001: unresolved external symbol "public: __cdecl Sim::SwapList<struct Sim::ComponentRenderCamera>::~SwapList<struct Sim::ComponentRenderCamera>(void)" (??1?$SwapList@UComponentRenderCamera@Sim@@@Sim@@QEAA@XZ)
+Wolf_Hunt.lib(SystemRender.obj) : error LNK2001: unresolved external symbol "public: __cdecl Sim::SwapList<struct Sim::ComponentRenderCamera>::SwapList<struct Sim::ComponentRenderCamera>(void)" (??0?$SwapList@UComponentRenderCamera@Sim@@@Sim@@QEAA@XZ)
+Wolf_Hunt.lib(SystemRender.obj) : error LNK2001: unresolved external symbol "public: __cdecl Sim::SwapList<struct Sim::ComponentRenderCircle>::~SwapList<struct Sim::ComponentRenderCircle>(void)" (??1?$SwapList@UComponentRenderCircle@Sim@@@Sim@@QEAA@XZ)
+Wolf_Hunt.lib(SystemRender.obj) : error LNK2001: unresolved external symbol "public: __cdecl Sim::SwapList<struct Sim::ComponentRenderCircle>::SwapList<struct Sim::ComponentRenderCircle>(void)" (??0?$SwapList@UComponentRenderCircle@Sim@@@Sim@@QEAA@XZ)
+D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Release\RenderTest.exe : fatal error LNK1120: 6 unresolved externals

@@ -10,7 +10,7 @@ namespace Sim {
 		int EnergyPerEat = 50;
 		bool Grown = false;
 		EntityGrass(World * world);
-		~EntityGrass();
+		virtual ~EntityGrass();
 		virtual void Update() override;
 	};
 }

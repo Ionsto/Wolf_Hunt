@@ -12,7 +12,7 @@ namespace Sim {
 		std::vector<EntityWolf*> PlayerWolf;
 		std::unique_ptr<World> WorldInstance;
 		SPGameInstance();
-		~SPGameInstance();
+		virtual ~SPGameInstance();
 		virtual void Update() override;
 	};
 }

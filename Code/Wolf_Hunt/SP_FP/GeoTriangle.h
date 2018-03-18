@@ -3,10 +3,11 @@
 class GeoTriangle :
 	public GeoObject
 {
-public:
+protected:
 	float Data[3*2];
+public:
 	GeoTriangle();
-	~GeoTriangle();
-	virtual void* GetData() override;
+	virtual ~GeoTriangle();
+	virtual void Render() override;
 };
 

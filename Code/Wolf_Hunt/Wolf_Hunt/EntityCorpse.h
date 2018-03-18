@@ -8,7 +8,7 @@ namespace Sim {
 		float MaxDecayTime = 30;
 		float DecayTimer = 0;
 		EntityCorpse(World * world);
-		~EntityCorpse();
+		virtual ~EntityCorpse();
 		virtual void Update() override;
 	};
 }

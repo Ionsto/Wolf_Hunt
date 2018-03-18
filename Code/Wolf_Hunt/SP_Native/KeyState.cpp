@@ -2,18 +2,18 @@
 
 
 
-KeyState::KeyState()
+SP_Native::KeyState::KeyState()
 {
 	Key = Up;
 }
 
 
-KeyState::~KeyState()
+SP_Native::KeyState::~KeyState()
 {
 
 }
 //0 = down, 1 = up
-void KeyState::Update()
+void SP_Native::KeyState::Update()
 {
 	switch(Key)
 	{

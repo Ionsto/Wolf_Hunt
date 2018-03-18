@@ -2,16 +2,16 @@
 
 
 
-MouseState::MouseState()
+SP_Native::MouseState::MouseState()
 {
 }
 
 
-MouseState::~MouseState()
+SP_Native::MouseState::~MouseState()
 {
 }
 
-void MouseState::Update()
+void SP_Native::MouseState::Update()
 {
 	switch (Left)
 	{

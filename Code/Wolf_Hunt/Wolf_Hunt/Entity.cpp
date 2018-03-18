@@ -2,24 +2,33 @@
 #include "World.h"
 #include <math.h>
 
-Sim::Entity::Entity(World * wrld)
+Sim::Entity::Entity()
 {
-	this->WorldObj = wrld;
-	LinearDamp = 0.0001;
-	AngularDamp = .005;
+	Type = EntityTypes::Other;
+	this->WorldObj = nullptr;
 	Acceleration = Vector<float>();
 	Alive = true;
 	DeathCallbacks = std::vector<std::function<void(Entity*)>*>();
 }
 
+Sim::Entity::Entity(World * wrld) : Entity()
+{
+	this->WorldObj = wrld;
+	IDRenderObject = wrld->WorldRender.AddCircle(Sim::ComponentRenderCircle(Pos, Size, 2));
+}
 
 Sim::Entity::~Entity()
 {
 	//clean up
 	//WorldObj->WorldGrid[GridID.X][GridID.Y].RemoveEntity(this);
-	for (auto callback : DeathCallbacks)
+	for (auto & callback : DeathCallbacks)
 	{
 		(*callback)(this);
+	}
+	if (IDRenderObject.Valid)
+	{
+		std::cout << "Delete circle from:" << (unsigned int)this << "\n";
+		WorldObj->WorldRender.RemoveCircle(IDRenderObject);
 	}
 }
 
@@ -35,6 +44,8 @@ void Sim::Entity::SetLocation(Vector<float> pos)
 		WorldObj->WorldGrid[GridID.X][GridID.Y].RemoveEntity(this);
 		GridID = NewGridID;
 	}
+	auto & Object = WorldObj->WorldRender.GetCircle(IDRenderObject);
+	Object.Position = Pos;
 }
 
 void Sim::Entity::ApplyFriction()
@@ -42,9 +53,9 @@ void Sim::Entity::ApplyFriction()
 	if (OnFloor)
 	{
 		auto Velocity = GetVelocity();
-		float Mag = sqrt(Velocity.Dot(Velocity));
+		float Mag = sqrt(Velocity.DotXY(Velocity));
 		//Cubic friction
-		float FrictionFactor = pow(LinearDamp, WorldObj->DeltaTime*100);
+		float FrictionFactor = 0.1;// pow(LinearDamp, WorldObj->DeltaTime)/50;
 		//Acceleration = Acceleration * (fmaxf(0, (2 - exp(Mag / 50))));
 		this->PosOld += (this->Pos - this->PosOld) * FrictionFactor;
 		if (Mag < 0.01)
@@ -61,6 +72,8 @@ void Sim::Entity::Update()
 	Acceleration.Z -= WorldObj->Gravity;
 	Intergrate();
 	EnforceBoundry();
+	auto & Object = WorldObj->WorldRender.GetCircle(IDRenderObject);
+	Object.Position = Pos;
 }
 void Sim::Entity::EnforceBoundry()
 {

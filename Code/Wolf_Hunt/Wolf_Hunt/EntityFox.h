@@ -14,7 +14,7 @@ namespace Sim {
 	public:
 		Vector<float> TargetLocation;
 		EntityFox(World * world);
-		~EntityFox();
+		virtual ~EntityFox();
 		void UpdateAI() override;
 		void Update() override;
 		virtual void Collision(Entity * ent) override;

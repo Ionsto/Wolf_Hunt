@@ -1,5 +1,8 @@
 #pragma once
 #include "Entity.h"
+#include "SystemRender.h"
+#include "SystemCollision.h"
+#include "SystemEntityAI.h"
 #include "GridNode.h"
 #include <Memory>
 #include <Array>
@@ -8,18 +11,24 @@ namespace Sim {
 	{
 	public:
 		float DeltaTime = 1/60;
-		int WorldSize;
-		static const int GridCount = 8;
-		int GridSize;
-		static const int EntityCount = 2000;
+		static const int GridCount = 4;
+		static const int GridSize = 100;
+		static const int WorldSize = GridCount*GridSize;
+		static const int EntityCount = 1000;
 		float Gravity = 9.8;
+
+		SystemRender WorldRender;
+		SystemCollision WorldCollision;
+		SystemEntityAI WorldAI;
+
+
 		std::array<std::array<Sim::GridNode, GridCount>, GridCount> WorldGrid;
 		//Represents the master list of all entities
 		std::array<std::unique_ptr<Sim::Entity>, EntityCount> EntityList;
 		//static void ResolveCollisionsListPairs(std::vector<std::reference_wrapper<std::vector<Sim::Entity *>>> & NearEntiteslists, int j);
 		Vector<int> GetGridIDs(Vector<float> Pos);
 		World();
-		~World();
+		virtual ~World();
 		//Single tick happens
 		void Update();
 		//Keep the grid datastructure correct

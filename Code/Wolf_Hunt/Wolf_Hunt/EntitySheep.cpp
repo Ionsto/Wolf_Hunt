@@ -11,7 +11,6 @@ Sim::EntitySheep::EntitySheep(Sim::World * wrld) : Sim::EntityLiving(wrld)
 	Type = EntityTypes::Sheep;
 	BoidsInstance = AIBoids();
 	NNInstance = AINeuralNetwork();
-	Size = 10;
 	MaxAccelerationForward = 500;
 	MaxAccelerationBack = 100;
 	MaxRotAcceleration = 50;
@@ -19,6 +18,7 @@ Sim::EntitySheep::EntitySheep(Sim::World * wrld) : Sim::EntityLiving(wrld)
 	//RND AI update speeds to not cause stutter en mass
 	AIUpdateMax *= (rand() % 100)/100.0;
 	EnergyLossPerAcc = 2 / 500.0;
+	WorldObj->WorldRender.GetCircle(IDRenderObject).Colour = 4;
 }
 
 
@@ -40,42 +40,25 @@ void Sim::EntitySheep::UpdateAI()
 	//Do ai updates
 	EntityLiving::UpdateAI();
 	auto NearEntity = WorldObj->GetNearbyEntities(GridID);
-	/*for each (auto list in NearEntity)
-	{
-		auto it = std::find(list.get().begin(), list.get().end(), this);
-		if (it != list.get().end())
-		{
-			std::swap(*it, list.get().back());
-			list.get().pop_back();
-		}
-	}*/
 	Vector<float> Acc;
 	int AIState = 0;
 	//Update NN
 	std::vector<float> Inputs;
 	//Sheepcount/wolfcount/grown grass count
 	int SheepCount = 0, WolfCount = 0, GrassCount = 0;
-	for (auto entitylist : NearEntity)
+	for (auto & entitylist : NearEntity)
 	{
-		for (auto entity : entitylist.get())
+		for (auto & entity : entitylist.get())
 		{
 			if (entity != this)
 			{
-				if (dynamic_cast<EntityHunter*>(entity) != nullptr)
+				if (entity->Type == EntityTypes::Wolf || EntityTypes::Fox)
 				{
 					++WolfCount;
 				}
-				if (dynamic_cast<EntitySheep*>(entity) != nullptr)
+				if (entity->Type == EntityTypes::Sheep)
 				{
 					++SheepCount;
-				}
-				if (dynamic_cast<EntityGrass*>(entity) != nullptr)
-				{
-
-					if (dynamic_cast<EntityGrass*>(entity)->Grown)
-					{
-						++GrassCount;
-					}
 				}
 			}
 		}
@@ -88,16 +71,16 @@ void Sim::EntitySheep::UpdateAI()
 	//Inputs.push_back((float)(MateCounter/15));
 	NNInstance.Update(Inputs);
 	//Push back AI states
-	float Testarray[] = { NNInstance.Layers[2][0].Output, 
-		NNInstance.Layers[2][1].Output, 
-		NNInstance.Layers[2][2].Output, };
+	float Testarray[] = { NNInstance.Layers.back()[0].Output, 
+		NNInstance.Layers.back()[1].Output,
+		NNInstance.Layers.back()[2].Output, };
 	AIState = std::distance(Testarray,std::max_element(Testarray, Testarray + 3));
 	//Boid nodes	
-	BoidsInstance.Repulsion = NNInstance.Layers[2][3].Output;//rep
-	BoidsInstance.Clump = NNInstance.Layers[2][4].Output;//clump
-	BoidsInstance.Coheasion = NNInstance.Layers[2][5].Output;//coehs
-	BoidsInstance.Flee = NNInstance.Layers[2][6].Output;//flee
-	BoidsInstance.WallAversion = NNInstance.Layers[2][7].Output;//wall aversion
+	BoidsInstance.Repulsion = NNInstance.Layers.back()[3].Output;//rep
+	BoidsInstance.Clump = NNInstance.Layers.back()[4].Output;//clump
+	BoidsInstance.Coheasion = NNInstance.Layers.back()[5].Output;//coehs
+	BoidsInstance.Flee = NNInstance.Layers.back()[6].Output;//flee
+	BoidsInstance.WallAversion = NNInstance.Layers.back()[7].Output;//wall aversion
 	//Update boids
 	switch (AIState)
 	{
@@ -109,7 +92,7 @@ void Sim::EntitySheep::UpdateAI()
 			break;
 		case 1:
 			//Eat
-			Energy += AIUpdateMax * 10;
+			Energy += AIUpdateMax * 50;
 			break;
 		case 2:
 			//Mate
@@ -124,7 +107,7 @@ void Sim::EntitySheep::UpdateAI()
 						//Splice the genes
 						Vector<float> diff = this->Pos - NearEnt->Pos;
 						float MinDistance = ((Size * 2)*(Size * 2)) + 10;
-						if (diff.Dot(diff) < MinDistance)
+						if (diff.DotXY(diff) < MinDistance)
 						{
 							auto child = std::make_unique<EntitySheep>(WorldObj);
 							child->Energy = MateEnergyCost * 2 - SheepCost;

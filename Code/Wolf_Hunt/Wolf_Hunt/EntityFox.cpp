@@ -16,6 +16,9 @@ Sim::EntityFox::EntityFox(World * world) : EntityHunter(world)
 	Attacking = true;
 	TargetLocation = Vector<float>(-1, -1);
 	this->AIState = EntityFox::States::Chase;
+	HoldConstraint->entityA = this;
+	EatingConstraint->entityA = this;
+	WorldObj->WorldRender.GetCircle(IDRenderObject).Colour = 3;
 }
 
 
@@ -32,7 +35,7 @@ void Sim::EntityFox::Update()
 			Vector<float> Diff = TargetLocation - Pos;
 			Diff = Diff * 5;
 			float CloseDistSqrd = 20 * 20;
-			if (Diff.Dot(Diff) > CloseDistSqrd)
+			if (Diff.DotXY(Diff) > CloseDistSqrd)
 			{
 				ApplyWalkForce(Diff);
 				TargetRotation = atan2f(Diff.Y, Diff.X);
@@ -78,23 +81,20 @@ void Sim::EntityFox::UpdateAI()
 
 void Sim::EntityFox::Collision(Entity * ent)
 {
-	if (dynamic_cast<EntitySheep*>(ent) != nullptr)
+	if (ent->Type == EntityTypes::Sheep)
 	{
 		if (Attacking)
 		{
 			ent->Kill();
 		}
 	}
-	if (dynamic_cast<EntityCorpse*>(ent) != nullptr)
+	if (ent->Type == EntityTypes::Corpse)
 	{
 		if (Attacking)
 		{
-			if (dynamic_cast<EntityCorpse*>(ent) != nullptr)
-			{
-				float Delta = fmin(((EntityCorpse*)ent)->Energy, EatSpeed) * WorldObj->DeltaTime;
-				Energy += Delta;
-				((EntityCorpse*)ent)->Energy -= Delta;
-			}
+			float Delta = fmin(((EntityCorpse*)ent)->Energy, EatSpeed) * WorldObj->DeltaTime;
+			Energy += Delta;
+			((EntityCorpse*)ent)->Energy -= Delta;
 		}
 	}
 }

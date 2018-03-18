@@ -4,13 +4,11 @@
 
 Sim::AINode::AINode(int weightcount)
 {
-	for(int i =0; i< weightcount;++i)
-		Weights.push_back(0);
+	Weights.resize(weightcount, 0);
 }
 Sim::AINode::AINode(const AINode & node)
 {
-	for(auto weight : node.Weights)
-		Weights.push_back(weight);
+	Weights = node.Weights;
 }
 
 

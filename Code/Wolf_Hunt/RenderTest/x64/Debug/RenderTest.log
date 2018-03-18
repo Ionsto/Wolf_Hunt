@@ -1,0 +1,6 @@
+﻿  main.cpp
+d:\github\wolf_hunt\code\wolf_hunt\rendertest\main.cpp(24): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\rendertest\main.cpp(36): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\rendertest\main.cpp(38): warning C4244: 'argument': conversion from 'float' to 'const unsigned char', possible loss of data
+d:\github\wolf_hunt\code\wolf_hunt\rendertest\main.cpp(54): warning C4305: '+=': truncation from 'double' to 'float'
+  RenderTest.vcxproj -> D:\Github\Wolf_Hunt\Code\Wolf_Hunt\x64\Debug\RenderTest.exe
