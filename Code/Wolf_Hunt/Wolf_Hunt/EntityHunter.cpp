@@ -5,7 +5,6 @@
 
 Sim::EntityHunter::EntityHunter(World * world) : EntityLiving(world)
 {
-	EatSpeed = 5000;
 	HoldConstraint = std::make_unique<Constraint>();
 	EatingConstraint = std::make_unique<Constraint>();
 	HoldConstraint->entityA = this;
@@ -42,14 +41,13 @@ void Sim::EntityHunter::TryHold(Entity * entity)
 			{
 				HoldConstraint->SetEntityB(entity);
 				HoldConstraint->Length = sqrt(DistSqrd);
-				//HoldConstraint = Constraint(this, entity);
 			}
 		}
 	}
 }
 void Sim::EntityHunter::TryEat(Entity * entity)
 {
-	if (dynamic_cast<EntityLiving*>(entity) != nullptr)
+	if (dynamic_cast<EntityCorpse*>(entity) != nullptr)
 	{
 		//If the held entity is nonexistant & we currently arn't holding entity
 		if (EatingConstraint->entityB != entity)
@@ -61,17 +59,8 @@ void Sim::EntityHunter::TryEat(Entity * entity)
 			if (DistSqrd < EatDistance * EatDistance)
 			{
 				std::cout << "Entity eaten\n";
-				//EatingConstraint.entityB = entity;
-				//EatingConstraint.Length = sqrt(DistSqrd);
-				//std::cout << (int)((Entity*)EatingConstraint.entityA) << ":";
-				//std::cout << (int)((Entity*)this) << "\n";
-				//EatingConstraint.entityA = this;
-				//EatingConstraint.entityB = entity;
 				EatingConstraint->SetEntityB(entity);
-				//EatingConstraint.WorldObj = this->WorldObj;
-				//Diff = EatingConstraint.entityA->Pos - EatingConstraint.entityB->Pos;
-				EatingConstraint->Length = sqrt(DistSqrd);// Diff.DotXY(Diff));
-				//EatingConstraint = Constraint(this, entity);
+				EatingConstraint->Length = sqrt(DistSqrd);
 			}
 		}
 	}
@@ -87,6 +76,7 @@ void Sim::EntityHunter::UpdateConstraints()
 		float Delta = fmin(((EntityCorpse*)EatingConstraint->entityB)->Energy, EatSpeed * WorldObj->DeltaTime);
 		this->Energy += Delta;
 		((EntityCorpse*)EatingConstraint->entityB)->Energy -= Delta;
+		std::cout << "Eating thing for delta: " << Delta << "\n";
 		//std::cout << "Delta:"<<Delta <<" full:"<< ((EntityCorpse*)EatingConstraint->entityB)->Energy <<"\n";
 	}
 	else

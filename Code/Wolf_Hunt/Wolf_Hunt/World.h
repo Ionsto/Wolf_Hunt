@@ -11,10 +11,10 @@ namespace Sim {
 	{
 	public:
 		float DeltaTime = 1/60;
-		static const int GridCount = 4;
-		static const int GridSize = 100;
+		static const int GridCount = 8;
+		static const int GridSize = 200;
 		static const int WorldSize = GridCount*GridSize;
-		static const int EntityCount = 1000;
+		static const int EntityCount = 500;
 		float Gravity = 9.8;
 
 		SystemRender WorldRender;

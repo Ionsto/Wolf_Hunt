@@ -5,7 +5,7 @@
 
 Sim::Constraint::Constraint()
 {
-	RestitutionConstant = 0.8;
+	RestitutionConstant = 0.95;
 	MaxExpansion = 1;
 	entityA = nullptr;
 	entityB = nullptr;

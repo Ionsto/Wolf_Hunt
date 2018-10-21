@@ -9,12 +9,14 @@ namespace Sim {
 	{
 	protected:
 	public:
+		//General flag for a failed constructor
+		bool ValidObject = true;
 		ComponentIDRenderObject IDRenderObject;
 		ComponentIDCollision IDCollision;
 		enum EntityTypes {
 			Other, Wolf, Sheep, Corpse, Fox
 		} Type;
-		const float PI = 3.14159;
+		static constexpr float PI = 3.14159;
 		static constexpr float LinearDamp = 1e-10;
 		static constexpr float AngularDamp = .005;
 		Vector<float> Pos;
@@ -43,6 +45,7 @@ namespace Sim {
 		void ApplyForce(Vector<float> force);
 		void ApplyMoment(float moment);
 		virtual void ApplyFriction();
+		virtual void UpdateRenderObject();
 		//Clean up everything
 		virtual void Kill();
 		float NormaliseAngle(float angle);

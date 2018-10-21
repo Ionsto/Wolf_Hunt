@@ -145,6 +145,7 @@
     <ClInclude Include="GameInstance.h" />
     <ClInclude Include="GridNode.h" />
     <ClInclude Include="RenderComponents.h" />
+    <ClInclude Include="RenderGrid.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SPGameInstance.h" />
     <ClInclude Include="SwapList.h" />

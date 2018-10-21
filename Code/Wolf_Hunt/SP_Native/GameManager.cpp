@@ -30,14 +30,14 @@ void SP_Native::GameManager::Init()
 	//std::cout << (int)WorldInstance->EntityList[0].get() << "\n";
 	//WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(100, 100));
 	
-	for (int i = 0; i < 100; ++i)
+	for (int i = 0; i < 200; ++i)
 	{
 		int id = WorldInstance->AddEntity(std::make_unique<Sim::EntitySheep>(WorldInstance.get()));
 		WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(rand() % WorldInstance->WorldSize, rand() % WorldInstance->WorldSize));
-		((Sim::EntitySheep*)WorldInstance->EntityList[id].get())->NNInstance.Randomise(100);
+		((Sim::EntitySheep*)WorldInstance->EntityList[id].get())->NNInstance.Randomise(2);
 		((Sim::EntitySheep*)WorldInstance->EntityList[id].get())->Age += rand() % 40;
 	}
-	for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 20; ++i)
 	{
 		int id = WorldInstance->AddEntity(std::make_unique<Sim::EntityFox>(WorldInstance.get()));
 		WorldInstance->EntityList[id]->SetLocation(Sim::Vector<float>(rand() % WorldInstance->WorldSize, rand() % WorldInstance->WorldSize));
@@ -59,10 +59,10 @@ void SP_Native::GameManager::DebugObjectSizes()
 
 void SP_Native::GameManager::Update()
 {
-	UpdateCamera();
 	for (int i = 0; TimeDifference >= WorldInstance->DeltaTime; TimeDifference -= WorldInstance->DeltaTime)
 	{
 		WorldInstance->Update();
+		UpdateCamera();
 	}
 	GameHud.Update();
 }
@@ -221,18 +221,23 @@ void SP_Native::GameManager::PollInput()
 		RenderEngine->Scale /= ScaleIncrement;
 		RenderEngine->CameraSize = RenderEngine->CameraSize * ScaleIncrement;
 	}
+
+	if (KeyArray[sf::Keyboard::Escape].Key == ButtonState::GoingDown)
+	{
+		Running = false;
+	}
+	if (KeyArray[sf::Keyboard::Escape].Key == ButtonState::GoingDown)
+	{
+		Running = false;
+	}
+	if (KeyArray[sf::Keyboard::R].Key == ButtonState::GoingDown)
+	{
+		RenderEngine->DebugView = !RenderEngine->DebugView;
+	}
 }
 void SP_Native::GameManager::UpdateCamera()
 {
 	float CameraSpeed = 500;
-	if (KeyArray[sf::Keyboard::Escape].Key == ButtonState::GoingDown)
-	{
-		Running = false;
-	}
-	if (KeyArray[sf::Keyboard::Escape].Key == ButtonState::GoingDown)
-	{
-		Running = false;
-	}
 	if (KeyArray[sf::Keyboard::A].Key == ButtonState::Down || KeyArray[sf::Keyboard::A].Key == ButtonState::GoingDown)
 	{
 		RenderEngine->CameraLocation.X -= CameraSpeed * WorldInstance->DeltaTime / RenderEngine->Scale;

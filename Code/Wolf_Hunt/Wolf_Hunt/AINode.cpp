@@ -29,9 +29,9 @@ void Sim::AINode::Update(std::vector<Sim::AINode> &InputNodes)
 float Sim::AINode::OutputFunction(float WeightedIn)
 {
 	//ReLU
-	return fmaxf(WeightedIn, 0);
+	//return fmaxf(WeightedIn, 0);
 	//Sigmoid
-	//return WeightedIn / (1 + abs(WeightedIn));
+	return WeightedIn / (1 + abs(WeightedIn));
 }
 void Sim::AINode::Splice(Sim::AINode &node)
 {
@@ -54,6 +54,13 @@ void Sim::AINode::Splice(Sim::AINode &node)
 			}
 			//Take a
 		}
+	}
+}
+void Sim::AINode::Copy(Sim::AINode &node)
+{
+	for (int weight = 0; weight < Weights.size(); ++weight)
+	{
+		Weights[weight] = node.Weights[weight];
 	}
 }
 void Sim::AINode::Randomise(float Delta)

@@ -8,6 +8,7 @@
 
 Sim::World::World() : WorldRender()
 {
+	WorldRender.WorldSize = WorldSize;
 	for (int i = 0; i < GridCount; ++i)
 	{
 		for (int v = 0; v < GridCount; ++v)
@@ -187,7 +188,7 @@ inline void Sim::World::ResolveCollisionsListed(std::vector<Entity *> & lista, s
 			{
 				for (int j = 0; j < listb.size(); ++j)
 				{
-					if (listb[j]->Alive)
+					if (listb[j]->Alive && lista[i]->Alive)
 					{
 						ResolveEntEntCollision(lista[i], listb[j]);
 					}
@@ -207,6 +208,11 @@ Sim::Vector<int> Sim::World::GetGridIDs(Vector<float> pos)
 }
 int Sim::World::AddEntity(std::unique_ptr<Entity> ent)
 {
+	if (!ent->ValidObject)
+	{
+		std::cout << "Added invalid object\n";
+		return -1;
+	}
 	for (int i = 0; i < EntityCount; ++i)
 	{
 		if (!EntityList[i])

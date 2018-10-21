@@ -62,7 +62,7 @@ void Sim::EntityFox::UpdateAI()
 	auto EntityClosest = WorldObj->GetClosestEntity(this);
 	enum
 	{
-		Chase, Eat
+		Chase, Eat\
 	};
 	Eating = false;
 	switch (AIState)
@@ -85,7 +85,7 @@ void Sim::EntityFox::Collision(Entity * ent)
 	{
 		if (Attacking)
 		{
-			ent->Kill();
+			ent->Alive = false;
 		}
 	}
 	if (ent->Type == EntityTypes::Corpse)

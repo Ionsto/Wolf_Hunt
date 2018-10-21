@@ -4,8 +4,8 @@
 
 Sim::SystemRender::SystemRender()
 {
-	SListCircle = SwapList<ComponentRenderCircle>();
-	SListCamera = SwapList<ComponentRenderCamera>();
+	SListCircle = SwapList<ComponentRenderCircle,MaxCicles>();
+	SListCamera = SwapList<ComponentRenderCamera,MaxCameras>();
 }
 
 
@@ -14,11 +14,15 @@ Sim::SystemRender::~SystemRender()
 }
 void Sim::SystemRender::RenderScene()
 {
+	//if (RenderCounter++ >= RenderCounterMax)
+	//{
+		RenderCounter = 0;
 #pragma omp parallel for
-	for (int i = 0; i < SListCamera.ActiveItems; ++i)
-	{
-		RenderCamera(i);
-	}
+		for (int i = 0; i < SListCamera.ActiveItems; ++i)
+		{
+			RenderCamera(i);
+		}
+	//}
 }
 void Sim::SystemRender::RenderCamera(int camid)
 {
@@ -51,6 +55,36 @@ void Sim::SystemRender::RenderCamera(int camid)
 					camera.Rays[s].Colour = SListCircle.ItemPool[i].Colour;
 				}
 			}
+		}
+		//Wall collisions
+		float Distance = (-CameraPos.Y)/RayDir.Y;
+		//Top wall
+		if (Distance >= 0 && Distance < camera.Rays[s].Distance)
+		{
+			camera.Rays[s].Distance = Distance;
+			camera.Rays[s].Colour = 0;
+		}
+		Distance = (WorldSize - CameraPos.Y) / RayDir.Y;
+		//bottom wall 
+		if (Distance >= 0 && Distance < camera.Rays[s].Distance)
+		{
+			camera.Rays[s].Distance = Distance;
+			camera.Rays[s].Colour = 0;
+		}
+
+		Distance = (-CameraPos.X) / RayDir.X;
+		//Top wall
+		if (Distance >= 0 && Distance < camera.Rays[s].Distance)
+		{
+			camera.Rays[s].Distance = Distance;
+			camera.Rays[s].Colour = 0;
+		}
+		Distance = (WorldSize - CameraPos.X) / RayDir.X;
+		//bottom wall 
+		if (Distance >= 0 && Distance < camera.Rays[s].Distance)
+		{
+			camera.Rays[s].Distance = Distance;
+			camera.Rays[s].Colour = 0;
 		}
 	}
 }

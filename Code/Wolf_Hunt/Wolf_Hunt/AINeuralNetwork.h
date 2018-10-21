@@ -12,7 +12,8 @@ namespace Sim
 		virtual ~AINeuralNetwork();
 		void Update(std::vector<float> Inputs);
 		std::vector<float> GetOutput();
-		void Splice(AINeuralNetwork network);
+		void Splice(AINeuralNetwork & network);
+		void Copy(AINeuralNetwork & network);
 		void Randomise(float delta);
 	};
 }

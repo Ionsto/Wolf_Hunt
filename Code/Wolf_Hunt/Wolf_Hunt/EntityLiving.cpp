@@ -11,6 +11,10 @@ Sim::EntityLiving::EntityLiving(Sim::World * wrld) : Sim::Entity(wrld)
 	MaxRotAcceleration = 70;
 	RotAcceleration = 20;
 	IDRenderVision = wrld->WorldRender.AddCamera(Sim::ComponentRenderCamera());
+	if (!IDRenderVision.Valid)
+	{
+		ValidObject = false;
+	}
 }
 
 

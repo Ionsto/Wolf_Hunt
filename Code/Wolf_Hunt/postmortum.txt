@@ -1,0 +1,772 @@
+Added circle
+Added camera
+1231217008
+1231217008
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Init complete
+Start mainloop
+Added circle
+Added camera
+Added circle
+Added camera
+remove camera 59
+Set item at 59 to item at 212
+Delete circle from: 1347390368
+remove circle remove camera 14859
+
+Set item at 59Set item at 148 to item at 212 to item at 211
+
+Delete circle from: 1354168768
+remove circle 148
+Set item at 148 to item at 211
+Added circle
+Added camera
+remove camera 116
+Set item at 116 to item at 211
+Delete circle from: 1352922480
+remove circle 116
+Set item at 116 to item at 211
+0.0519555
+0.000821566
+0.000474232
+Added circle
+Added camera
+remove camera 144
+Set item at 144 to item at 211
+Delete circle from: 1354169632
+remove circle 144
+Set item at 144 to item at 211
+0.000566592
+0.000521057
+0.000483385
+0.000372026
+0.000425687
+0.000553202
+Added circle
+Added camera
+remove camera 24
+Set item at 24 to item at 211
+Delete circle from: 1232348432
+remove circle 24
+Set item at 24 to item at 211
+0.00044406
+Added circle
+Added camera
+remove camera 25
+Set item at 25 to item at 211
+Delete circle from: 1347037664
+remove circle 25
+Set item at 25 to item at 211
+0.000436771
+0.000405876
+Added circle
+Added camera
+remove camera 172
+Set item at 172 to item at 211
+Delete circle from: 1357469280
+remove circle 172
+Set item at 172 to item at 211
+0.000446634
+Added circle
+Added camera
+remove camera 80
+Set item at 80 to item at 211
+Delete circle from: 1350027936
+remove circle 80
+Set item at 80 to item at 211
+Added circle
+Added camera
+remove camera 39
+Set item at 39 to item at 211
+Delete circle from: 1347033776
+remove circle 39
+Set item at 39 to item at 211
+Added circle
+Added camera
+0.000606191
+Added circle
+Added camera
+remove camera 198
+Set item at 198 to item at 212
+Delete circle from: 1357465824
+remove circle 198
+Set item at 198 to item at 212
+Added circle
+Added camera
+0.000510819
+0.000483152
+Added circle
+Added camera
+remove camera 58
+Set item at 58 to item at 213
+Delete circle from: 1347388640
+remove circle 58
+Set item at 58 to item at 213
+0.00046772
+Added circle
+Added camera
+0.000489195
+Added circle
+Added camera
+remove camera 38
+Set item at 38 to item at 214
+Delete circle from: 1347037232
+remove circle 38
+Set item at 38 to item at 214
+Added circle
+Added camera
+remove camera 96
+Set item at 96 to item at 214
+Delete circle from: 1350032688
+remove circle 96
+Set item at 96 to item at 214
+0.000513149
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+remove camera 47
+Set item at 47 to item at 216
+Delete circle from: 1347386912
+remove circle 47
+Set item at 47 to item at 216
+Added circle
+Added camera
+remove camera 26
+Set item at 26 to item at 216
+Delete circle from: 1347033344
+remove circle 26
+Set item at 26 to item at 216
+0.000545943
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+remove camera 76
+Set item at 76 to item at 219
+Delete circle from: 1348690480
+remove circle 76
+Set item at 76 to item at 219
+0.000512309
+Added circle
+Added camera
+Added circle
+Added camera
+0.000669395
+Added circle
+Added camera
+0.000527829
+0.000569823
+0.000528074
+Added circle
+Added camera
+remove camera 23
+Set item at 23 to item at 222
+Delete circle from: 1232348000
+remove circle 23
+Set item at 23 to item at 222
+Added circle
+Added camera
+0.000559791
+Added circle
+Added camera
+remove camera 130
+Set item at 130 to item at 223
+Delete circle from: 1352927232
+remove circle 130
+Set item at 130 to item at 223
+0.000569585
+Added circle
+Added camera
+remove camera 189
+Set item at 189 to item at 223
+Delete circle from: 1357463664
+remove circle 189
+Set item at 189 to item at 223
+Added circle
+Added camera
+0.00054914
+Added circle
+Added camera
+0.000520265
+Added circle
+Added camera
+Added circle
+Added camera
+remove camera 32
+Set item at 32 to item at 226
+Delete circle from: 1347039392
+remove circle 32
+Set item at 32 to item at 226
+Added circle
+Added camera
+0.000598164
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+0.000538605
+0.000564065
+0.000732898
+Added circle
+Added camera
+remove camera 113
+Set item at 113 to item at 230
+Delete circle from: 1351657488
+remove circle 113
+Set item at 113 to item at 230
+0.000547232
+0.000555889
+Added circle
+Added camera
+Added circle
+Added camera
+remove camera 12
+Set item at 12 to item at 231
+Delete circle from: 1231918288
+remove circle 12
+Set item at 12 to item at 231
+remove camera 31
+Set item at 31 to item at 230
+Delete circle from: 1347035936
+remove circle 31
+Set item at 31 to item at 230
+Added circle
+Added camera
+remove camera 217
+Set item at 217 to item at 230
+Delete circle from: 1357473600
+remove circle 217
+Set item at 217 to item at 230
+0.000534437
+Added circle
+Added camera
+remove camera 119
+Set item at 119 to item at 230
+Delete circle from: 1352923776
+remove circle 119
+Set item at 119 to item at 230
+Added circle
+Added camera
+0.000534936
+Added circle
+Added camera
+Added circle
+Added camera
+Added circle
+Added camera
+0.000512197
+Added circle
+Added camera
+Added circle
+Added camera
+0.000678037
+Added circle
+Added camera
+0.000625809
+0.000615446
+0.000605084
+0.000645303
+Added circle
+Added camera
+Added circle
+Added camera
+remove camera 218
+Set item at 218 to item at 238
+Delete circle from: 1347033344
+remove circle 218
+Set item at 218 to item at 238
+Added circle
+Added camera
+Added circle
+Added camera
+remove camera 104
+Set item at 104 to item at 239
+Delete circle from: 1351655328
+remove circle 104
+Set item at 104 to item at 239
+0.000738026
+Added circle
+Added camera
+remove camera 179
+Set item at 179 to item at 239
+Delete circle from: 1357479216
+remove circle 179
+Set item at 179 to item at 239
+Added circle
+Added camera
+0.000755755
+Added circle
+Added camera
+remove camera 214
+Set item at 38 to item at 240
+Delete circle from: 1359496128
+remove circle 214
+Set item at 38 to item at 240
+Added circle
+Added camera
+Added circle
+Added camera
+remove camera 109
+Set item at 109 to item at 241
+Delete circle from: 1351657056
+remove circle 109
+Set item at 109 to item at 241
+0.000643479
+remove camera 47
+Set item at 26 to item at 240
+Delete circle from: 1359500480
+remove circle 47
+Set item at 26 to item at 240
+Added circle
+Added camera
+remove camera 219
+Set item at 76 to item at 240
+Delete circle from: 1359494592
+remove circle 219
+Set item at 76 to item at 240
+Added circle
+Added camera
+remove camera 40
+Set item at 40 to item at 240
+Delete circle from: 1347035072
+remove circle 40
+Set item at 40 to item at 240
+Added circle
+Added camera
+0.000645393
+Added circle
+Added camera
+0.000676885
+0.000685442
+Added circle
+Added camera
+0.000707071
+A

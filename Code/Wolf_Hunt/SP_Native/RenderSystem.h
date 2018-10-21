@@ -12,6 +12,7 @@ namespace SP_Native {
 	class RenderSystem
 	{
 	public:
+		bool DebugView = false;
 		float Scale = 1;
 		Sim::Vector<float> CameraLocation;
 		Sim::Vector<float> CameraSize;

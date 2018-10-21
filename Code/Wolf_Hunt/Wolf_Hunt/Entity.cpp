@@ -15,6 +15,10 @@ Sim::Entity::Entity(World * wrld) : Entity()
 {
 	this->WorldObj = wrld;
 	IDRenderObject = wrld->WorldRender.AddCircle(Sim::ComponentRenderCircle(Pos, Size, 2));
+	if (!IDRenderObject.Valid)
+	{
+		ValidObject = false;
+	}
 }
 
 Sim::Entity::~Entity()
@@ -27,7 +31,7 @@ Sim::Entity::~Entity()
 	}
 	if (IDRenderObject.Valid)
 	{
-		std::cout << "Delete circle from:" << (unsigned int)this << "\n";
+		std::cout << "Delete circle from: " << (unsigned int)this << "\n";
 		WorldObj->WorldRender.RemoveCircle(IDRenderObject);
 	}
 }
@@ -72,6 +76,10 @@ void Sim::Entity::Update()
 	Acceleration.Z -= WorldObj->Gravity;
 	Intergrate();
 	EnforceBoundry();
+	UpdateRenderObject();
+}
+void Sim::Entity::UpdateRenderObject()
+{
 	auto & Object = WorldObj->WorldRender.GetCircle(IDRenderObject);
 	Object.Position = Pos;
 }

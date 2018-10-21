@@ -63,27 +63,36 @@ void SP_Native::RenderSystem::RenderSprites(Sim::World * world, sf::RenderWindow
 						window->draw(Wolf);
 						//render wolf
 						break;
-					/*case Sim::EntityLiving::EntityTypes::Sheep:
-						//render sheep
-						Sheep.setScale(Scale, Scale);
-						Sheep.setRotation(ent->Rot * (180 / PI));
-						Sheep.setPosition((ent->Pos.X - CameraPos.X)*Scale, (ent->Pos.Y - CameraPos.Y)*Scale);
-						window->draw(Sheep);
+					case Sim::EntityLiving::EntityTypes::Sheep:
+						if (DebugView)
+						{
+							//render sheep
+							Sheep.setScale(Scale, Scale);
+							Sheep.setRotation(ent->Rot * (180 / PI));
+							Sheep.setPosition((ent->Pos.X - CameraPos.X)*Scale, (ent->Pos.Y - CameraPos.Y)*Scale);
+							window->draw(Sheep);
+						}
 						break;
 					case Sim::EntityLiving::EntityTypes::Fox:
-						//render sheep
-						Fox.setScale(Scale, Scale);
-						Fox.setRotation(ent->Rot * (180 / PI));
-						Fox.setPosition((ent->Pos.X - CameraPos.X)*Scale, (ent->Pos.Y - CameraPos.Y)*Scale);
-						window->draw(Fox);
+						if (DebugView)
+						{
+							//render sheep
+							Fox.setScale(Scale, Scale);
+							Fox.setRotation(ent->Rot * (180 / PI));
+							Fox.setPosition((ent->Pos.X - CameraPos.X)*Scale, (ent->Pos.Y - CameraPos.Y)*Scale);
+							window->draw(Fox);
+						}
 						break;
 					case Sim::EntityCorpse::EntityTypes::Corpse:
-						//render sheep
-						Corpse.setScale(Scale, Scale);
-						Corpse.setRotation(ent->Rot * (180 / PI));
-						Corpse.setPosition((ent->Pos.X - CameraPos.X)*Scale, (ent->Pos.Y - CameraPos.Y)*Scale);
-						window->draw(Corpse);
-						break;*/
+						if (DebugView)
+						{
+							//render sheep
+							Corpse.setScale(Scale, Scale);
+							Corpse.setRotation(ent->Rot * (180 / PI));
+							Corpse.setPosition((ent->Pos.X - CameraPos.X)*Scale, (ent->Pos.Y - CameraPos.Y)*Scale);
+							window->draw(Corpse);
+						}
+						break;
 					}
 				}
 			}

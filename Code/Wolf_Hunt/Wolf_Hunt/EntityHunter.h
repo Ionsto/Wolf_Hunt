@@ -9,7 +9,7 @@ namespace Sim {
 	class EntityHunter : public EntityLiving
 	{
 	public:
-		float EatSpeed = 10;
+		float EatSpeed = 40;
 		bool Attacking = false;
 		bool Eating = false;
 		float EatDistance;

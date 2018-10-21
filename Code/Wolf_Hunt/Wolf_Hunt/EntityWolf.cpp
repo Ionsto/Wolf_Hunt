@@ -99,15 +99,15 @@ void Sim::EntityWolf::UseBite()
 	Attacking = true;
 	Eating = true;
 
+	std::cout << "Eat" << std::endl;
 	if (!EatingConstraint->ConnectionExists())
 	{
+		std::cout << "Try eat" << std::endl;
 		auto EntityClosest = WorldObj->GetClosestEntity(this);
 		if (dynamic_cast<EntityCorpse*>(EntityClosest) != nullptr)
 		{
-			if (EntityClosest != nullptr)
-			{
-				TryEat(EntityClosest);
-			}
+			std::cout << "Neighbor found" << std::endl;
+			TryEat(EntityClosest);
 		}
 	}
 	else
@@ -144,20 +144,7 @@ void Sim::EntityWolf::Collision(Entity * entity)
 	{
 		if (Attacking)
 		{
-			entity->Kill();
-		}
-	}/*
-	if (dynamic_cast<EntityCorpse*>(entity) != nullptr)
-	{
-		if (Eating)
-		{
-			if (dynamic_cast<EntityCorpse*>(entity) != nullptr)
-			{
-				float Delta = fmin(((EntityCorpse*)entity)->Energy, EatSpeed) * WorldObj->DeltaTime;
-				Energy += Delta;
-				((EntityCorpse*)entity)->Energy -= Delta;
-			}
+			entity->Alive = false;
 		}
 	}
-	*/
 }
